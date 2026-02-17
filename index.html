@@ -2,383 +2,350 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CreatingArtOnline - Animation Studio & Character Creator</title>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>ArtFlow Studio - Professional Digital Art</title>
     <style>
-        :root {
-            --primary: #6366f1;
-            --secondary: #ec4899;
-            --accent: #f59e0b;
-            --dark: #0f172a;
-            --darker: #020617;
-            --gradient: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #ec4899 100%);
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        
         body {
-            font-family: 'Outfit', sans-serif;
-            background: var(--darker);
-            color: white;
-            overflow-x: hidden;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: #fff;
+            overflow: hidden;
+            touch-action: none;
+            user-select: none;
         }
 
-        /* Navigation */
-        nav {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            padding: 15px 5%;
-            background: rgba(15, 23, 42, 0.95);
-            backdrop-filter: blur(20px);
+        .app-container {
             display: flex;
-            justify-content: space-between;
+            height: 100vh;
+            width: 100vw;
+            position: relative;
+        }
+
+        /* Left Toolbar - Tools */
+        .toolbar-left {
+            width: 80px;
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+            display: flex;
+            flex-direction: column;
             align-items: center;
-            z-index: 1000;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-        }
-
-        .logo {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 24px;
-            font-weight: 700;
-            background: var(--gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .nav-tabs {
-            display: flex;
-            gap: 10px;
-        }
-
-        .nav-tab {
-            padding: 10px 20px;
-            background: rgba(255,255,255,0.1);
-            border: none;
-            border-radius: 20px;
-            color: white;
-            cursor: pointer;
-            transition: all 0.3s;
-            font-weight: 500;
-        }
-
-        .nav-tab:hover, .nav-tab.active {
-            background: var(--gradient);
-        }
-
-        /* Main Container */
-        .studio-container {
-            margin-top: 70px;
-            padding: 20px;
-            display: grid;
-            grid-template-columns: 280px 1fr 300px;
-            gap: 20px;
-            height: calc(100vh - 70px);
-        }
-
-        /* Left Panel - Tools & Characters */
-        .left-panel {
-            background: rgba(255,255,255,0.05);
-            border-radius: 20px;
-            padding: 20px;
+            padding: 10px 5px;
+            gap: 8px;
+            border-right: 1px solid rgba(255, 255, 255, 0.1);
+            z-index: 100;
             overflow-y: auto;
         }
 
+        .tool-btn {
+            width: 60px;
+            height: 60px;
+            border: none;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 4px;
+            transition: all 0.3s ease;
+            position: relative;
+            font-size: 11px;
+        }
+
+        .tool-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .tool-btn.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .tool-icon {
+            font-size: 24px;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+        }
+
+        /* Brush Preview */
+        .brush-preview {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            border: 2px solid #fff;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+        }
+
+        /* Right Panel - Properties */
+        .properties-panel {
+            width: 280px;
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+            border-left: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            overflow-y: auto;
+            z-index: 100;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
         .panel-section {
-            margin-bottom: 25px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            padding: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .panel-title {
             font-size: 12px;
             text-transform: uppercase;
-            color: rgba(255,255,255,0.5);
-            margin-bottom: 15px;
             letter-spacing: 1px;
+            color: #a0a0a0;
+            margin-bottom: 12px;
             font-weight: 600;
-        }
-
-        /* Mode Selection */
-        .mode-buttons {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-
-        .mode-btn {
-            padding: 15px;
-            background: rgba(255,255,255,0.1);
-            border: 2px solid transparent;
-            border-radius: 12px;
-            color: white;
-            cursor: pointer;
-            transition: all 0.3s;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 14px;
-        }
-
-        .mode-btn:hover, .mode-btn.active {
-            border-color: var(--primary);
-            background: rgba(99, 102, 241, 0.2);
-        }
-
-        .mode-btn span {
-            font-size: 20px;
-        }
-
-        /* Character Selector */
-        .character-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 10px;
-        }
-
-        .character-thumb {
-            aspect-ratio: 1;
-            background: rgba(255,255,255,0.1);
-            border-radius: 12px;
-            cursor: pointer;
-            transition: all 0.3s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 40px;
-            border: 2px solid transparent;
-        }
-
-        .character-thumb:hover, .character-thumb.active {
-            border-color: var(--primary);
-            transform: scale(1.05);
-        }
-
-        /* Dress Up Items */
-        .item-category {
-            margin-bottom: 15px;
-        }
-
-        .category-label {
-            font-size: 11px;
-            color: rgba(255,255,255,0.6);
-            margin-bottom: 8px;
-        }
-
-        .item-row {
-            display: flex;
-            gap: 8px;
-            flex-wrap: wrap;
-        }
-
-        .item-btn {
-            width: 50px;
-            height: 50px;
-            background: rgba(255,255,255,0.1);
-            border: 2px solid transparent;
-            border-radius: 10px;
-            cursor: pointer;
-            transition: all 0.2s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 24px;
-        }
-
-        .item-btn:hover, .item-btn.active {
-            border-color: var(--secondary);
-            background: rgba(236, 72, 153, 0.2);
         }
 
         /* Color Picker */
-        .color-grid {
+        .color-picker-container {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .color-wheel {
+            width: 100%;
+            height: 150px;
+            border-radius: 50%;
+            background: conic-gradient(
+                red, yellow, lime, cyan, blue, magenta, red
+            );
+            position: relative;
+            cursor: crosshair;
+            box-shadow: inset 0 0 20px rgba(0,0,0,0.5);
+        }
+
+        .color-wheel::after {
+            content: '';
+            position: absolute;
+            inset: 20px;
+            border-radius: 50%;
+            background: radial-gradient(circle, white 0%, transparent 70%);
+        }
+
+        .color-indicator {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            border: 3px solid white;
+            border-radius: 50%;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.5);
+            pointer-events: none;
+            transform: translate(-50%, -50%);
+        }
+
+        .current-color {
+            width: 100%;
+            height: 40px;
+            border-radius: 8px;
+            border: 2px solid rgba(255,255,255,0.2);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+
+        /* Sliders */
+        .slider-group {
+            margin-bottom: 15px;
+        }
+
+        .slider-label {
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+            margin-bottom: 5px;
+            color: #ccc;
+        }
+
+        input[type="range"] {
+            width: 100%;
+            height: 6px;
+            border-radius: 3px;
+            background: rgba(255,255,255,0.1);
+            outline: none;
+            -webkit-appearance: none;
+        }
+
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            cursor: pointer;
+            box-shadow: 0 2px 10px rgba(102, 126, 234, 0.5);
+        }
+
+        /* Brush Presets */
+        .brush-grid {
             display: grid;
-            grid-template-columns: repeat(5, 1fr);
+            grid-template-columns: repeat(3, 1fr);
             gap: 8px;
         }
 
-        .color-btn {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            border: 3px solid transparent;
-            cursor: pointer;
-            transition: transform 0.2s;
-        }
-
-        .color-btn:hover { transform: scale(1.1); }
-        .color-btn.active { border-color: white; box-shadow: 0 0 0 2px var(--primary); }
-
-        /* Center - Canvas Area */
-        .canvas-area {
-            background: rgba(0,0,0,0.3);
-            border-radius: 20px;
-            display: flex;
-            flex-direction: column;
-            overflow: hidden;
-        }
-
-        .canvas-header {
-            padding: 15px 20px;
-            background: rgba(255,255,255,0.05);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .canvas-title {
-            font-size: 16px;
-            font-weight: 600;
-        }
-
-        .playback-controls {
-            display: flex;
-            gap: 10px;
-            align-items: center;
-        }
-
-        .control-btn {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            border: none;
+        .brush-preset {
+            aspect-ratio: 1;
+            border-radius: 10px;
             background: rgba(255,255,255,0.1);
-            color: white;
+            border: 2px solid transparent;
             cursor: pointer;
-            font-size: 18px;
-            transition: all 0.3s;
             display: flex;
             align-items: center;
             justify-content: center;
+            font-size: 20px;
+            transition: all 0.2s;
         }
 
-        .control-btn:hover {
-            background: var(--primary);
-            transform: scale(1.1);
+        .brush-preset:hover {
+            background: rgba(255,255,255,0.2);
+            transform: scale(1.05);
         }
 
-        .control-btn.record {
-            background: #ef4444;
-            animation: pulse 2s infinite;
+        .brush-preset.active {
+            border-color: #667eea;
+            background: rgba(102, 126, 234, 0.3);
         }
 
-        @keyframes pulse {
-            0%, 100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7); }
-            50% { box-shadow: 0 0 0 10px rgba(239, 68, 68, 0); }
-        }
-
-        .timeline {
-            height: 60px;
-            background: rgba(255,255,255,0.05);
-            border-top: 1px solid rgba(255,255,255,0.1);
+        /* Canvas Area */
+        .canvas-container {
+            flex: 1;
+            position: relative;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(120, 119, 198, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(255, 119, 198, 0.1) 0%, transparent 50%);
+            overflow: hidden;
             display: flex;
             align-items: center;
-            padding: 0 20px;
-            gap: 10px;
-        }
-
-        .timeline-track {
-            flex: 1;
-            height: 30px;
-            background: rgba(0,0,0,0.3);
-            border-radius: 15px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .timeline-progress {
-            height: 100%;
-            background: var(--gradient);
-            width: 0%;
-            transition: width 0.1s;
-        }
-
-        .timeline-frames {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            display: flex;
-        }
-
-        .frame-marker {
-            flex: 1;
-            border-right: 1px solid rgba(255,255,255,0.1);
-        }
-
-        .frame-marker.active {
-            background: rgba(99, 102, 241, 0.5);
+            justify-content: center;
         }
 
         .canvas-wrapper {
-            flex: 1;
+            position: relative;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        canvas {
+            display: block;
+            cursor: crosshair;
+            background: #fff;
+        }
+
+        .canvas-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+        }
+
+        /* Top Bar */
+        .top-bar {
+            position: absolute;
+            top: 0;
+            left: 80px;
+            right: 280px;
+            height: 50px;
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(10px);
             display: flex;
             align-items: center;
-            justify-content: center;
-            position: relative;
-            padding: 20px;
+            justify-content: space-between;
+            padding: 0 20px;
+            z-index: 90;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
         }
 
-        #mainCanvas {
-            background: white;
-            border-radius: 12px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.5);
-            max-width: 100%;
-            max-height: 100%;
+        .project-title {
+            font-size: 18px;
+            font-weight: 600;
+            background: linear-gradient(90deg, #fff, #a0a0a0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
-        /* Animation Tools Overlay */
-        .anim-tools {
-            position: absolute;
-            bottom: 80px;
-            left: 50%;
-            transform: translateX(-50%);
+        .top-actions {
             display: flex;
-            gap: 15px;
-            background: rgba(0,0,0,0.8);
-            padding: 15px 25px;
-            border-radius: 50px;
-            backdrop-filter: blur(10px);
+            gap: 10px;
         }
 
-        /* Right Panel - Layers & Properties */
-        .right-panel {
-            background: rgba(255,255,255,0.05);
-            border-radius: 20px;
-            padding: 20px;
-            overflow-y: auto;
+        .action-btn {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 8px;
+            background: rgba(255,255,255,0.1);
+            color: #fff;
+            cursor: pointer;
+            font-size: 13px;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 6px;
         }
 
-        .layer-list {
+        .action-btn:hover {
+            background: rgba(255,255,255,0.2);
+            transform: translateY(-1px);
+        }
+
+        .action-btn.primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        /* Layers Panel */
+        .layers-list {
             display: flex;
             flex-direction: column;
             gap: 8px;
         }
 
         .layer-item {
-            padding: 12px;
-            background: rgba(255,255,255,0.1);
-            border-radius: 10px;
             display: flex;
             align-items: center;
             gap: 10px;
+            padding: 10px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 8px;
             cursor: pointer;
-            transition: all 0.3s;
+            transition: all 0.2s;
+            border: 2px solid transparent;
         }
 
-        .layer-item:hover, .layer-item.active {
-            background: rgba(99, 102, 241, 0.3);
+        .layer-item:hover {
+            background: rgba(255,255,255,0.1);
         }
 
-        .layer-icon {
-            width: 30px;
-            height: 30px;
-            background: rgba(255,255,255,0.2);
-            border-radius: 6px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        .layer-item.active {
+            border-color: #667eea;
+            background: rgba(102, 126, 234, 0.2);
+        }
+
+        .layer-thumb {
+            width: 40px;
+            height: 40px;
+            background: #fff;
+            border-radius: 4px;
+            border: 1px solid rgba(255,255,255,0.2);
         }
 
         .layer-info {
@@ -386,811 +353,908 @@
         }
 
         .layer-name {
-            font-size: 13px;
+            font-size: 12px;
             font-weight: 500;
         }
 
-        .layer-type {
-            font-size: 11px;
-            color: rgba(255,255,255,0.5);
+        .layer-opacity {
+            font-size: 10px;
+            color: #888;
         }
 
-        /* Sound Panel */
-        .sound-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 8px;
-        }
-
-        .sound-btn {
-            aspect-ratio: 1;
-            background: rgba(255,255,255,0.1);
-            border: none;
-            border-radius: 10px;
-            color: white;
-            cursor: pointer;
-            font-size: 20px;
-            transition: all 0.3s;
-        }
-
-        .sound-btn:hover {
-            background: var(--accent);
-            transform: scale(1.1);
-        }
-
-        /* Export Panel */
-        .export-options {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-
-        .export-btn {
-            padding: 15px;
-            background: var(--gradient);
-            border: none;
-            border-radius: 12px;
-            color: white;
-            cursor: pointer;
-            font-weight: 600;
-            transition: all 0.3s;
+        .layer-visibility {
+            width: 24px;
+            height: 24px;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 10px;
+            cursor: pointer;
+            opacity: 0.7;
         }
 
-        .export-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 30px rgba(99, 102, 241, 0.4);
+        .layer-visibility:hover {
+            opacity: 1;
         }
 
-        /* Modal */
-        .modal {
+        /* Selection Box */
+        .selection-box {
+            position: absolute;
+            border: 2px dashed #667eea;
+            background: rgba(102, 126, 234, 0.1);
+            pointer-events: none;
             display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
+        }
+
+        .selection-handles {
+            position: absolute;
             width: 100%;
             height: 100%;
-            background: rgba(0,0,0,0.8);
-            z-index: 2000;
+        }
+
+        .handle {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: #667eea;
+            border: 2px solid #fff;
+            border-radius: 50%;
+        }
+
+        .handle.nw { top: -5px; left: -5px; cursor: nw-resize; }
+        .handle.ne { top: -5px; right: -5px; cursor: ne-resize; }
+        .handle.sw { bottom: -5px; left: -5px; cursor: sw-resize; }
+        .handle.se { bottom: -5px; right: -5px; cursor: se-resize; }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .toolbar-left {
+                width: 60px;
+                padding: 5px;
+            }
+            
+            .tool-btn {
+                width: 50px;
+                height: 50px;
+                font-size: 10px;
+            }
+            
+            .tool-icon {
+                font-size: 20px;
+            }
+            
+            .properties-panel {
+                position: fixed;
+                right: -280px;
+                top: 0;
+                bottom: 0;
+                transition: right 0.3s ease;
+            }
+            
+            .properties-panel.open {
+                right: 0;
+            }
+            
+            .top-bar {
+                left: 60px;
+                right: 0;
+            }
+            
+            .mobile-menu-btn {
+                display: block !important;
+            }
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            position: absolute;
+            right: 10px;
+            top: 10px;
+            z-index: 200;
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            background: rgba(102, 126, 234, 0.8);
+            border: none;
+            color: #fff;
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        /* Texture Preview */
+        .texture-preview {
+            width: 100%;
+            height: 60px;
+            border-radius: 8px;
+            background: rgba(255,255,255,0.05);
+            display: flex;
             align-items: center;
             justify-content: center;
+            font-size: 12px;
+            color: #888;
+            margin-top: 10px;
+            border: 2px dashed rgba(255,255,255,0.1);
         }
 
-        .modal.active {
-            display: flex;
+        /* Gemstone Effects */
+        .gem-options {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 8px;
+            margin-top: 10px;
         }
 
-        .modal-content {
-            background: var(--dark);
-            padding: 30px;
-            border-radius: 20px;
-            max-width: 600px;
-            width: 90%;
+        .gem-btn {
+            padding: 8px;
+            border: 1px solid rgba(255,255,255,0.2);
+            background: rgba(255,255,255,0.05);
+            color: #fff;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 11px;
+            transition: all 0.2s;
         }
 
-        .modal-title {
-            font-size: 24px;
-            margin-bottom: 20px;
+        .gem-btn:hover, .gem-btn.active {
+            background: rgba(102, 126, 234, 0.3);
+            border-color: #667eea;
         }
 
-        .character-preview {
-            width: 200px;
-            height: 200px;
-            background: rgba(255,255,255,0.1);
-            border-radius: 20px;
-            margin: 0 auto 20px;
+        /* Loading Animation */
+        .loading {
+            position: fixed;
+            inset: 0;
+            background: #1a1a2e;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 100px;
+            z-index: 9999;
+            transition: opacity 0.5s;
         }
 
-        /* Responsive */
-        @media (max-width: 1200px) {
-            .studio-container {
-                grid-template-columns: 1fr;
-                grid-template-rows: auto 1fr auto;
-            }
-            .left-panel, .right-panel {
-                display: none;
-            }
+        .loading.hidden {
+            opacity: 0;
+            pointer-events: none;
         }
 
-        /* Animations */
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 3px solid rgba(255,255,255,0.1);
+            border-top-color: #667eea;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
         }
 
-        .animate-bounce {
-            animation: bounce 1s infinite;
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Custom Cursor */
+        .custom-cursor {
+            position: fixed;
+            pointer-events: none;
+            z-index: 9998;
+            mix-blend-mode: difference;
+            display: none;
+        }
+
+        /* Undo/Redo Stack Indicator */
+        .history-indicator {
+            position: absolute;
+            bottom: 20px;
+            left: 100px;
+            background: rgba(0,0,0,0.6);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 12px;
+            color: #888;
+            backdrop-filter: blur(10px);
         }
     </style>
 </head>
 <body>
-    <!-- Navigation -->
-    <nav>
-        <div class="logo">🎨 CreatingArtOnline Studio</div>
-        <div class="nav-tabs">
-            <button class="nav-tab active" onclick="setMode('draw')">✏️ Draw</button>
-            <button class="nav-tab" onclick="setMode('character')">👤 Character</button>
-            <button class="nav-tab" onclick="setMode('animate')">🎬 Animate</button>
+    <div class="loading" id="loading">
+        <div class="spinner"></div>
+    </div>
+
+    <div class="app-container">
+        <!-- Left Toolbar -->
+        <div class="toolbar-left">
+            <button class="tool-btn active" data-tool="brush" title="Brush">
+                <span class="tool-icon">🖌️</span>
+                <span>Brush</span>
+                <div class="brush-preview" style="background: #000;"></div>
+            </button>
+            
+            <button class="tool-btn" data-tool="pencil" title="Pencil">
+                <span class="tool-icon">✏️</span>
+                <span>Pencil</span>
+            </button>
+            
+            <button class="tool-btn" data-tool="marker" title="Marker">
+                <span class="tool-icon">🖊️</span>
+                <span>Marker</span>
+            </button>
+            
+            <button class="tool-btn" data-tool="pen" title="Pen">
+                <span class="tool-icon">🖋️</span>
+                <span>Pen</span>
+            </button>
+            
+            <button class="tool-btn" data-tool="gemstone" title="Gemstone">
+                <span class="tool-icon">💎</span>
+                <span>Gem</span>
+            </button>
+            
+            <button class="tool-btn" data-tool="skin" title="Skin Texture">
+                <span class="tool-icon">👆</span>
+                <span>Skin</span>
+            </button>
+            
+            <button class="tool-btn" data-tool="eraser" title="Eraser">
+                <span class="tool-icon">🧼</span>
+                <span>Eraser</span>
+            </button>
+            
+            <button class="tool-btn" data-tool="smudge" title="Smudge">
+                <span class="tool-icon">🌫️</span>
+                <span>Smudge</span>
+            </button>
+            
+            <button class="tool-btn" data-tool="select" title="Select & Move">
+                <span class="tool-icon">⬚</span>
+                <span>Select</span>
+            </button>
+            
+            <button class="tool-btn" data-tool="lasso" title="Lasso Select">
+                <span class="tool-icon">⭕</span>
+                <span>Lasso</span>
+            </button>
+            
+            <button class="tool-btn" data-tool="fill" title="Fill">
+                <span class="tool-icon">🪣</span>
+                <span>Fill</span>
+            </button>
+            
+            <button class="tool-btn" data-tool="text" title="Text">
+                <span class="tool-icon">T</span>
+                <span>Text</span>
+            </button>
         </div>
-    </nav>
 
-    <!-- Main Studio -->
-    <div class="studio-container">
-        <!-- Left Panel -->
-        <div class="left-panel">
-            <!-- Mode: Character Creator -->
-            <div id="characterPanel" class="panel-section" style="display: none;">
-                <div class="panel-title">Choose Character</div>
-                <div class="character-grid">
-                    <div class="character-thumb active" onclick="selectCharacter('chibi')" data-char="chibi">🧒</div>
-                    <div class="character-thumb" onclick="selectCharacter('anime')" data-char="anime">👧</div>
-                    <div class="character-thumb" onclick="selectCharacter('boy')" data-char="boy">👦</div>
-                    <div class="character-thumb" onclick="selectCharacter('girl')" data-char="girl">👩</div>
-                    <div class="character-thumb" onclick="selectCharacter('cat')" data-char="cat">🐱</div>
-                    <div class="character-thumb" onclick="selectCharacter('dog')" data-char="dog">🐶</div>
+        <!-- Main Canvas Area -->
+        <div class="canvas-container" id="canvasContainer">
+            <div class="top-bar">
+                <div class="project-title">ArtFlow Studio</div>
+                <div class="top-actions">
+                    <button class="action-btn" onclick="undo()">↩️ Undo</button>
+                    <button class="action-btn" onclick="redo()">↪️ Redo</button>
+                    <button class="action-btn" onclick="clearCanvas()">🗑️ Clear</button>
+                    <button class="action-btn primary" onclick="exportImage()">💾 Export</button>
                 </div>
+            </div>
+            
+            <div class="canvas-wrapper" id="canvasWrapper">
+                <canvas id="mainCanvas"></canvas>
+                <canvas id="tempCanvas" class="canvas-overlay"></canvas>
+                <div class="selection-box" id="selectionBox">
+                    <div class="selection-handles">
+                        <div class="handle nw"></div>
+                        <div class="handle ne"></div>
+                        <div class="handle sw"></div>
+                        <div class="handle se"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="history-indicator">
+                History: <span id="historyCount">0</span> steps
+            </div>
+        </div>
 
-                <div class="panel-title" style="margin-top: 20px;">Dress Up</div>
+        <button class="mobile-menu-btn" onclick="toggleProperties()">⚙️</button>
+
+        <!-- Right Properties Panel -->
+        <div class="properties-panel" id="propertiesPanel">
+            <!-- Color Section -->
+            <div class="panel-section">
+                <div class="panel-title">Color</div>
+                <div class="color-picker-container">
+                    <div class="color-wheel" id="colorWheel">
+                        <div class="color-indicator" id="colorIndicator" style="left: 50%; top: 50%;"></div>
+                    </div>
+                    <div class="current-color" id="currentColor" style="background: #000;"></div>
+                    <input type="text" id="hexColor" value="#000000" style="width: 100%; margin-top: 10px; padding: 8px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.2); background: rgba(0,0,0,0.3); color: #fff; text-align: center; font-family: monospace;">
+                </div>
+            </div>
+
+            <!-- Brush Settings -->
+            <div class="panel-section">
+                <div class="panel-title">Brush Settings</div>
                 
-                <div class="item-category">
-                    <div class="category-label">Hair Style</div>
-                    <div class="item-row">
-                        <button class="item-btn" onclick="setAccessory('hair', 'short')">💇</button>
-                        <button class="item-btn" onclick="setAccessory('hair', 'long')">💇‍♀️</button>
-                        <button class="item-btn" onclick="setAccessory('hair', 'spiky')">⚡</button>
-                        <button class="item-btn" onclick="setAccessory('hair', 'ponytail')">🎀</button>
+                <div class="slider-group">
+                    <div class="slider-label">
+                        <span>Size</span>
+                        <span id="sizeValue">10px</span>
                     </div>
+                    <input type="range" id="brushSize" min="1" max="200" value="10">
                 </div>
-
-                <div class="item-category">
-                    <div class="category-label">Outfit</div>
-                    <div class="item-row">
-                        <button class="item-btn" onclick="setAccessory('outfit', 'casual')">👕</button>
-                        <button class="item-btn" onclick="setAccessory('outfit', 'dress')">👗</button>
-                        <button class="item-btn" onclick="setAccessory('outfit', 'suit')">👔</button>
-                        <button class="item-btn" onclick="setAccessory('outfit', 'hero')">🦸</button>
-                    </div>
-                </div>
-
-                <div class="item-category">
-                    <div class="category-label">Accessories</div>
-                    <div class="item-row">
-                        <button class="item-btn" onclick="setAccessory('acc', 'glasses')">👓</button>
-                        <button class="item-btn" onclick="setAccessory('acc', 'hat')">🎩</button>
-                        <button class="item-btn" onclick="setAccessory('acc', 'bow')">🎀</button>
-                        <button class="item-btn" onclick="setAccessory('acc', 'crown')">👑</button>
-                    </div>
-                </div>
-
-                <div class="panel-title" style="margin-top: 20px;">Colors</div>
-                <div class="color-grid">
-                    <button class="color-btn active" style="background: #ffdbac" onclick="setSkinColor('#ffdbac')"></button>
-                    <button class="color-btn" style="background: #f1c27d" onclick="setSkinColor('#f1c27d')"></button>
-                    <button class="color-btn" style="background: #e0ac69" onclick="setSkinColor('#e0ac69')"></button>
-                    <button class="color-btn" style="background: #8d5524" onclick="setSkinColor('#8d5524')"></button>
-                    <button class="color-btn" style="background: #c68642" onclick="setSkinColor('#c68642')"></button>
-                    <button class="color-btn" style="background: #ff0000" onclick="setHairColor('#ff0000')"></button>
-                    <button class="color-btn" style="background: #00ff00" onclick="setHairColor('#00ff00')"></button>
-                    <button class="color-btn" style="background: #0000ff" onclick="setHairColor('#0000ff')"></button>
-                    <button class="color-btn" style="background: #ffff00" onclick="setHairColor('#ffff00')"></button>
-                    <button class="color-btn" style="background: #ff00ff" onclick="setHairColor('#ff00ff')"></button>
-                </div>
-            </div>
-
-            <!-- Mode: Drawing Tools -->
-            <div id="drawPanel" class="panel-section">
-                <div class="panel-title">Drawing Tools</div>
-                <div class="mode-buttons">
-                    <button class="mode-btn active" onclick="setTool('brush')">
-                        <span>✏️</span> Brush
-                    </button>
-                    <button class="mode-btn" onclick="setTool('pencil')">
-                        <span>✍️</span> Pencil
-                    </button>
-                    <button class="mode-btn" onclick="setTool('marker')">
-                        <span>🖍️</span> Marker
-                    </button>
-                    <button class="mode-btn" onclick="setTool('spray')">
-                        <span>🎨</span> Spray
-                    </button>
-                    <button class="mode-btn" onclick="setTool('eraser')">
-                        <span>🧹</span> Eraser
-                    </button>
-                </div>
-
-                <div class="panel-title" style="margin-top: 20px;">Brush Size</div>
-                <input type="range" min="1" max="100" value="5" style="width: 100%;" oninput="setBrushSize(this.value)">
-
-                <div class="panel-title" style="margin-top: 20px;">Colors</div>
-                <div class="color-grid">
-                    <button class="color-btn active" style="background: #000000" onclick="setColor('#000000')"></button>
-                    <button class="color-btn" style="background: #ffffff" onclick="setColor('#ffffff')"></button>
-                    <button class="color-btn" style="background: #ef4444" onclick="setColor('#ef4444')"></button>
-                    <button class="color-btn" style="background: #f97316" onclick="setColor('#f97316')"></button>
-                    <button class="color-btn" style="background: #f59e0b" onclick="setColor('#f59e0b')"></button>
-                    <button class="color-btn" style="background: #84cc16" onclick="setColor('#84cc16')"></button>
-                    <button class="color-btn" style="background: #10b981" onclick="setColor('#10b981')"></button>
-                    <button class="color-btn" style="background: #06b6d4" onclick="setColor('#06b6d4')"></button>
-                    <button class="color-btn" style="background: #3b82f6" onclick="setColor('#3b82f6')"></button>
-                    <button class="color-btn" style="background: #8b5cf6" onclick="setColor('#8b5cf6')"></button>
-                </div>
-            </div>
-
-            <!-- Mode: Animation -->
-            <div id="animatePanel" class="panel-section" style="display: none;">
-                <div class="panel-title">Animation Tools</div>
-                <div class="mode-buttons">
-                    <button class="mode-btn" onclick="addKeyframe()">
-                        <span>📸</span> Add Keyframe
-                    </button>
-                    <button class="mode-btn" onclick="playAnimation()">
-                        <span>▶️</span> Play
-                    </button>
-                    <button class="mode-btn" onclick="stopAnimation()">
-                        <span>⏹️</span> Stop
-                    </button>
-                    <button class="mode-btn" onclick="clearAnimation()">
-                        <span>🗑️</span> Clear All
-                    </button>
-                </div>
-
-                <div class="panel-title" style="margin-top: 20px;">Frame Rate</div>
-                <select style="width: 100%; padding: 10px; border-radius: 8px; background: rgba(255,255,255,0.1); color: white; border: none;" onchange="setFPS(this.value)">
-                    <option value="12">12 FPS</option>
-                    <option value="24" selected>24 FPS</option>
-                    <option value="30">30 FPS</option>
-                    <option value="60">60 FPS</option>
-                </select>
-
-                <div class="panel-title" style="margin-top: 20px;">Onion Skin</div>
-                <input type="range" min="0" max="100" value="50" style="width: 100%;" oninput="setOnionSkin(this.value)">
-            </div>
-        </div>
-
-        <!-- Center Canvas -->
-        <div class="canvas-area">
-            <div class="canvas-header">
-                <div class="canvas-title" id="canvasTitle">Drawing Canvas</div>
-                <div class="playback-controls">
-                    <button class="control-btn" onclick="undo()" title="Undo">↩️</button>
-                    <button class="control-btn" onclick="redo()" title="Redo">↪️</button>
-                    <button class="control-btn record" onclick="toggleRecording()" title="Record Video" id="recordBtn">⏺️</button>
-                    <button class="control-btn" onclick="saveProject()" title="Save">💾</button>
-                </div>
-            </div>
-
-            <div class="canvas-wrapper">
-                <canvas id="mainCanvas" width="800" height="600"></canvas>
                 
-                <div class="anim-tools" id="animTools" style="display: none;">
-                    <button class="control-btn" onclick="prevFrame()">⏮️</button>
-                    <button class="control-btn" onclick="togglePlay()" id="playBtn">▶️</button>
-                    <button class="control-btn" onclick="nextFrame()">⏭️</button>
+                <div class="slider-group">
+                    <div class="slider-label">
+                        <span>Opacity</span>
+                        <span id="opacityValue">100%</span>
+                    </div>
+                    <input type="range" id="brushOpacity" min="1" max="100" value="100">
+                </div>
+                
+                <div class="slider-group">
+                    <div class="slider-label">
+                        <span>Flow</span>
+                        <span id="flowValue">100%</span>
+                    </div>
+                    <input type="range" id="brushFlow" min="1" max="100" value="100">
+                </div>
+                
+                <div class="slider-group">
+                    <div class="slider-label">
+                        <span>Spacing</span>
+                        <span id="spacingValue">10%</span>
+                    </div>
+                    <input type="range" id="brushSpacing" min="1" max="100" value="10">
                 </div>
             </div>
 
-            <div class="timeline" id="timeline" style="display: none;">
-                <span style="font-size: 12px;">Frame: <span id="currentFrame">1</span></span>
-                <div class="timeline-track">
-                    <div class="timeline-progress" id="timelineProgress"></div>
-                    <div class="timeline-frames" id="timelineFrames"></div>
+            <!-- Brush Presets -->
+            <div class="panel-section">
+                <div class="panel-title">Brush Presets</div>
+                <div class="brush-grid" id="brushPresets">
+                    <div class="brush-preset active" data-brush="round" title="Round">⚪</div>
+                    <div class="brush-preset" data-brush="flat" title="Flat">▬</div>
+                    <div class="brush-preset" data-brush="filbert" title="Filbert">🔵</div>
+                    <div class="brush-preset" data-brush="fan" title="Fan">🪭</div>
+                    <div class="brush-preset" data-brush="texture" title="Texture">🌿</div>
+                    <div class="brush-preset" data-brush="splatter" title="Splatter">💦</div>
                 </div>
-                <span style="font-size: 12px;" id="totalFrames">/ 1</span>
             </div>
-        </div>
 
-        <!-- Right Panel -->
-        <div class="right-panel">
+            <!-- Special Effects -->
+            <div class="panel-section" id="gemSection" style="display: none;">
+                <div class="panel-title">Gemstone Effects</div>
+                <div class="gem-options">
+                    <button class="gem-btn active" data-gem="ruby">Ruby</button>
+                    <button class="gem-btn" data-gem="sapphire">Sapphire</button>
+                    <button class="gem-btn" data-gem="emerald">Emerald</button>
+                    <button class="gem-btn" data-gem="diamond">Diamond</button>
+                    <button class="gem-btn" data-gem="amethyst">Amethyst</button>
+                    <button class="gem-btn" data-gem="topaz">Topaz</button>
+                </div>
+            </div>
+
+            <!-- Skin Texture -->
+            <div class="panel-section" id="skinSection" style="display: none;">
+                <div class="panel-title">Skin Texture</div>
+                <div class="slider-group">
+                    <div class="slider-label">
+                        <span>Pore Size</span>
+                        <span id="poreValue">50%</span>
+                    </div>
+                    <input type="range" id="poreSize" min="0" max="100" value="50">
+                </div>
+                <div class="slider-group">
+                    <div class="slider-label">
+                        <span>Roughness</span>
+                        <span id="roughnessValue">30%</span>
+                    </div>
+                    <input type="range" id="roughness" min="0" max="100" value="30">
+                </div>
+                <div class="texture-preview" id="texturePreview">
+                    Skin Texture Preview
+                </div>
+            </div>
+
             <!-- Layers -->
             <div class="panel-section">
                 <div class="panel-title">Layers</div>
-                <div class="layer-list" id="layerList">
-                    <div class="layer-item active">
-                        <div class="layer-icon">🎨</div>
+                <div class="layers-list" id="layersList">
+                    <div class="layer-item active" data-layer="0">
+                        <div class="layer-thumb"></div>
                         <div class="layer-info">
-                            <div class="layer-name">Background</div>
-                            <div class="layer-type">Canvas</div>
+                            <div class="layer-name">Layer 1</div>
+                            <div class="layer-opacity">100%</div>
                         </div>
-                    </div>
-                    <div class="layer-item">
-                        <div class="layer-icon">👤</div>
-                        <div class="layer-info">
-                            <div class="layer-name">Character</div>
-                            <div class="layer-type">Vector</div>
-                        </div>
-                    </div>
-                    <div class="layer-item">
-                        <div class="layer-icon">✨</div>
-                        <div class="layer-info">
-                            <div class="layer-name">Effects</div>
-                            <div class="layer-type">Particles</div>
-                        </div>
+                        <div class="layer-visibility">👁️</div>
                     </div>
                 </div>
+                <button class="action-btn" style="width: 100%; margin-top: 10px;" onclick="addLayer()">+ Add Layer</button>
             </div>
 
-            <!-- Sound Effects -->
+            <!-- Light Editing -->
             <div class="panel-section">
-                <div class="panel-title">Sound Effects</div>
-                <div class="sound-grid">
-                    <button class="sound-btn" onclick="playSound('draw')">✏️</button>
-                    <button class="sound-btn" onclick="playSound('pop')">💥</button>
-                    <button class="sound-btn" onclick="playSound('magic')">✨</button>
-                    <button class="sound-btn" onclick="playSound('splash')">💦</button>
-                    <button class="sound-btn" onclick="playSound('whoosh')">🌪️</button>
-                    <button class="sound-btn" onclick="playSound('ding')">🛎️</button>
+                <div class="panel-title">Light & Color</div>
+                <div class="slider-group">
+                    <div class="slider-label">
+                        <span>Brightness</span>
+                        <span id="brightnessValue">0</span>
+                    </div>
+                    <input type="range" id="brightness" min="-100" max="100" value="0">
                 </div>
-            </div>
-
-            <!-- Export -->
-            <div class="panel-section">
-                <div class="panel-title">Export</div>
-                <div class="export-options">
-                    <button class="export-btn" onclick="exportImage()">
-                        <span>🖼️</span> Save as Image
-                    </button>
-                    <button class="export-btn" onclick="exportVideo()">
-                        <span>🎬</span> Export Video
-                    </button>
-                    <button class="export-btn" onclick="exportGIF()">
-                        <span>🎞️</span> Export GIF
-                    </button>
+                <div class="slider-group">
+                    <div class="slider-label">
+                        <span>Contrast</span>
+                        <span id="contrastValue">0</span>
+                    </div>
+                    <input type="range" id="contrast" min="-100" max="100" value="0">
                 </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Character Preview Modal -->
-    <div class="modal" id="characterModal">
-        <div class="modal-content">
-            <h2 class="modal-title">Your Character</h2>
-            <div class="character-preview" id="characterPreview">🧒</div>
-            <div style="display: flex; gap: 10px; justify-content: center;">
-                <button class="export-btn" onclick="useCharacter()">Use Character</button>
-                <button class="export-btn" onclick="closeModal()" style="background: rgba(255,255,255,0.2);">Edit More</button>
+                <div class="slider-group">
+                    <div class="slider-label">
+                        <span>Saturation</span>
+                        <span id="saturationValue">0</span>
+                    </div>
+                    <input type="range" id="saturation" min="-100" max="100" value="0">
+                </div>
+                <div class="slider-group">
+                    <div class="slider-label">
+                        <span>Blur</span>
+                        <span id="blurValue">0</span>
+                    </div>
+                    <input type="range" id="blur" min="0" max="20" value="0">
+                </div>
+                <button class="action-btn primary" style="width: 100%; margin-top: 10px;" onclick="applyLightEdits()">Apply Effects</button>
             </div>
         </div>
     </div>
 
     <script>
-        // ==================== AUDIO SYSTEM ====================
-        const AudioContext = window.AudioContext || window.webkitAudioContext;
-        const audioCtx = new AudioContext();
-
-        const sounds = {
-            draw: () => createTone(800, 0.1, 'sine'),
-            pop: () => createTone(400, 0.05, 'square'),
-            magic: () => createTone(1200, 0.3, 'sine'),
-            splash: () => createNoise(0.2),
-            whoosh: () => createSweep(200, 800, 0.3),
-            ding: () => createTone(880, 0.5, 'sine')
-        };
-
-        function createTone(freq, duration, type) {
-            const osc = audioCtx.createOscillator();
-            const gain = audioCtx.createGain();
-            osc.type = type;
-            osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
-            gain.gain.setValueAtTime(0.3, audioCtx.currentTime);
-            gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + duration);
-            osc.connect(gain);
-            gain.connect(audioCtx.destination);
-            osc.start();
-            osc.stop(audioCtx.currentTime + duration);
-        }
-
-        function createNoise(duration) {
-            const bufferSize = audioCtx.sampleRate * duration;
-            const buffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
-            const data = buffer.getChannelData(0);
-            for (let i = 0; i < bufferSize; i++) {
-                data[i] = Math.random() * 2 - 1;
-            }
-            const noise = audioCtx.createBufferSource();
-            noise.buffer = buffer;
-            const gain = audioCtx.createGain();
-            gain.gain.setValueAtTime(0.3, audioCtx.currentTime);
-            gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + duration);
-            noise.connect(gain);
-            gain.connect(audioCtx.destination);
-            noise.start();
-        }
-
-        function createSweep(startFreq, endFreq, duration) {
-            const osc = audioCtx.createOscillator();
-            const gain = audioCtx.createGain();
-            osc.frequency.setValueAtTime(startFreq, audioCtx.currentTime);
-            osc.frequency.linearRampToValueAtTime(endFreq, audioCtx.currentTime + duration);
-            gain.gain.setValueAtTime(0.3, audioCtx.currentTime);
-            gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + duration);
-            osc.connect(gain);
-            gain.connect(audioCtx.destination);
-            osc.start();
-            osc.stop(audioCtx.currentTime + duration);
-        }
-
-        function playSound(name) {
-            if (audioCtx.state === 'suspended') audioCtx.resume();
-            if (sounds[name]) sounds[name]();
-        }
-
-        // ==================== CANVAS SETUP ====================
+        // Initialize Canvas
         const canvas = document.getElementById('mainCanvas');
-        const ctx = canvas.getContext('2d');
+        const ctx = canvas.getContext('2d', { willReadFrequently: true });
+        const tempCanvas = document.getElementById('tempCanvas');
+        const tempCtx = tempCanvas.getContext('2d');
         
-        // Initialize white background
-        ctx.fillStyle = '#ffffff';
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        // Set canvas size
+        function resizeCanvas() {
+            const wrapper = document.getElementById('canvasWrapper');
+            const container = document.getElementById('canvasContainer');
+            const size = Math.min(container.clientWidth - 40, container.clientHeight - 100, 800);
+            
+            canvas.width = size;
+            canvas.height = size;
+            tempCanvas.width = size;
+            tempCanvas.height = size;
+            
+            // Fill white background
+            ctx.fillStyle = '#ffffff';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+        }
+        
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
 
-        let isDrawing = false;
+        // State Management
         let currentTool = 'brush';
         let currentColor = '#000000';
-        let currentSize = 5;
-        let currentMode = 'draw';
+        let brushSize = 10;
+        let brushOpacity = 1;
+        let brushFlow = 1;
+        let brushSpacing = 0.1;
+        let isDrawing = false;
+        let lastX = 0;
+        let lastY = 0;
+        let lastTime = 0;
+        let history = [];
+        let historyStep = -1;
+        let layers = [{ canvas: canvas, ctx: ctx, visible: true, opacity: 1 }];
+        let currentLayer = 0;
+        let selection = null;
+        let isSelecting = false;
+        let selectionStart = null;
+        let selectedContent = null;
+        let isMoving = false;
+        let moveOffset = { x: 0, y: 0 };
 
-        // ==================== DRAWING SYSTEM ====================
+        // Tool Switching
+        document.querySelectorAll('.tool-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.tool-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                currentTool = btn.dataset.tool;
+                
+                // Show/hide special panels
+                document.getElementById('gemSection').style.display = currentTool === 'gemstone' ? 'block' : 'none';
+                document.getElementById('skinSection').style.display = currentTool === 'skin' ? 'block' : 'none';
+                
+                updateCursor();
+            });
+        });
+
+        // Brush Presets
+        document.querySelectorAll('.brush-preset').forEach(preset => {
+            preset.addEventListener('click', () => {
+                document.querySelectorAll('.brush-preset').forEach(p => p.classList.remove('active'));
+                preset.classList.add('active');
+            });
+        });
+
+        // Gemstone Selection
+        document.querySelectorAll('.gem-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.gem-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+            });
+        });
+
+        // Color Picker
+        const colorWheel = document.getElementById('colorWheel');
+        const colorIndicator = document.getElementById('colorIndicator');
+        const currentColorDisplay = document.getElementById('currentColor');
+        const hexInput = document.getElementById('hexColor');
+
+        function hsvToRgb(h, s, v) {
+            let r, g, b;
+            const i = Math.floor(h * 6);
+            const f = h * 6 - i;
+            const p = v * (1 - s);
+            const q = v * (1 - f * s);
+            const t = v * (1 - (1 - f) * s);
+            
+            switch (i % 6) {
+                case 0: r = v; g = t; b = p; break;
+                case 1: r = q; g = v; b = p; break;
+                case 2: r = p; g = v; b = t; break;
+                case 3: r = p; g = q; b = v; break;
+                case 4: r = t; g = p; b = v; break;
+                case 5: r = v; g = p; b = q; break;
+            }
+            
+            return [Math.round(r * 255), Math.round(g * 255), Math.round(b * 255)];
+        }
+
+        function updateColorFromWheel(e) {
+            const rect = colorWheel.getBoundingClientRect();
+            const centerX = rect.width / 2;
+            const centerY = rect.height / 2;
+            const x = e.clientX - rect.left - centerX;
+            const y = e.clientY - rect.top - centerY;
+            
+            const angle = Math.atan2(y, x);
+            const hue = (angle + Math.PI) / (2 * Math.PI);
+            const dist = Math.min(Math.sqrt(x * x + y * y), centerX - 20);
+            const saturation = dist / (centerX - 20);
+            
+            const [r, g, b] = hsvToRgb(hue, saturation, 1);
+            currentColor = `rgb(${r}, ${g}, ${b})`;
+            
+            colorIndicator.style.left = (e.clientX - rect.left) + 'px';
+            colorIndicator.style.top = (e.clientY - rect.top) + 'px';
+            currentColorDisplay.style.background = currentColor;
+            hexInput.value = rgbToHex(r, g, b);
+            
+            document.querySelector('.brush-preview').style.background = currentColor;
+        }
+
+        function rgbToHex(r, g, b) {
+            return '#' + [r, g, b].map(x => {
+                const hex = x.toString(16);
+                return hex.length === 1 ? '0' + hex : hex;
+            }).join('');
+        }
+
+        colorWheel.addEventListener('mousedown', (e) => {
+            updateColorFromWheel(e);
+            const moveHandler = (e) => updateColorFromWheel(e);
+            const upHandler = () => {
+                document.removeEventListener('mousemove', moveHandler);
+                document.removeEventListener('mouseup', upHandler);
+            };
+            document.addEventListener('mousemove', moveHandler);
+            document.addEventListener('mouseup', upHandler);
+        });
+
+        // Sliders
+        document.getElementById('brushSize').addEventListener('input', (e) => {
+            brushSize = parseInt(e.target.value);
+            document.getElementById('sizeValue').textContent = brushSize + 'px';
+        });
+
+        document.getElementById('brushOpacity').addEventListener('input', (e) => {
+            brushOpacity = parseInt(e.target.value) / 100;
+            document.getElementById('opacityValue').textContent = e.target.value + '%';
+        });
+
+        document.getElementById('brushFlow').addEventListener('input', (e) => {
+            brushFlow = parseInt(e.target.value) / 100;
+            document.getElementById('flowValue').textContent = e.target.value + '%';
+        });
+
+        document.getElementById('brushSpacing').addEventListener('input', (e) => {
+            brushSpacing = parseInt(e.target.value) / 100;
+            document.getElementById('spacingValue').textContent = e.target.value + '%';
+        });
+
+        // Brush Engine
+        function getBrushTexture(size, type) {
+            const brushCanvas = document.createElement('canvas');
+            brushCanvas.width = size * 2;
+            brushCanvas.height = size * 2;
+            const bctx = brushCanvas.getContext('2d');
+            
+            const gradient = bctx.createRadialGradient(size, size, 0, size, size, size);
+            
+            switch(type) {
+                case 'marker':
+                    gradient.addColorStop(0, `rgba(0,0,0,${brushOpacity})`);
+                    gradient.addColorStop(0.5, `rgba(0,0,0,${brushOpacity * 0.5})`);
+                    gradient.addColorStop(1, 'rgba(0,0,0,0)');
+                    bctx.fillStyle = gradient;
+                    bctx.fillRect(0, 0, size * 2, size * 2);
+                    break;
+                    
+                case 'pencil':
+                    bctx.fillStyle = `rgba(0,0,0,${brushOpacity})`;
+                    for(let i = 0; i < 100; i++) {
+                        const x = Math.random() * size * 2;
+                        const y = Math.random() * size * 2;
+                        if(Math.pow(x - size, 2) + Math.pow(y - size, 2) <= size * size) {
+                            bctx.fillRect(x, y, 1, 1);
+                        }
+                    }
+                    break;
+                    
+                case 'skin':
+                    bctx.fillStyle = `rgba(0,0,0,${brushOpacity})`;
+                    const pores = document.getElementById('poreSize').value;
+                    for(let i = 0; i < pores * 2; i++) {
+                        const x = Math.random() * size * 2;
+                        const y = Math.random() * size * 2;
+                        const r = Math.random() * 2;
+                        bctx.beginPath();
+                        bctx.arc(x, y, r, 0, Math.PI * 2);
+                        bctx.fill();
+                    }
+                    break;
+                    
+                case 'gemstone':
+                    const gemType = document.querySelector('.gem-btn.active')?.dataset.gem || 'ruby';
+                    const colors = {
+                        ruby: ['#ff0040', '#ff6b6b', '#8b0000'],
+                        sapphire: ['#0040ff', '#6b9fff', '#00008b'],
+                        emerald: ['#00ff40', '#6bff9f', '#008b00'],
+                        diamond: ['#ffffff', '#e0e0e0', '#b0b0b0'],
+                        amethyst: ['#9b59b6', '#bb8fce', '#6c3483'],
+                        topaz: ['#ffa500', '#ffcc6b', '#cc7000']
+                    };
+                    const gemColors = colors[gemType];
+                    
+                    // Faceted gem effect
+                    bctx.fillStyle = gemColors[0];
+                    bctx.fillRect(0, 0, size * 2, size * 2);
+                    
+                    // Add facets
+                    bctx.fillStyle = gemColors[1];
+                    bctx.beginPath();
+                    bctx.moveTo(size, 0);
+                    bctx.lineTo(size * 2, size);
+                    bctx.lineTo(size, size * 2);
+                    bctx.lineTo(0, size);
+                    bctx.closePath();
+                    bctx.fill();
+                    
+                    // Highlight
+                    bctx.fillStyle = gemColors[2];
+                    bctx.beginPath();
+                    bctx.arc(size * 0.3, size * 0.3, size * 0.2, 0, Math.PI * 2);
+                    bctx.fill();
+                    break;
+                    
+                default:
+                    gradient.addColorStop(0, `rgba(0,0,0,${brushOpacity})`);
+                    gradient.addColorStop(1, 'rgba(0,0,0,0)');
+                    bctx.fillStyle = gradient;
+                    bctx.beginPath();
+                    bctx.arc(size, size, size, 0, Math.PI * 2);
+                    bctx.fill();
+            }
+            
+            return brushCanvas;
+        }
+
+        function drawBrush(x, y, pressure = 1) {
+            const ctx = layers[currentLayer].ctx;
+            const size = brushSize * pressure;
+            
+            ctx.globalAlpha = brushOpacity * brushFlow;
+            ctx.globalCompositeOperation = currentTool === 'eraser' ? 'destination-out' : 'source-over';
+            
+            const brushType = currentTool === 'marker' ? 'marker' : 
+                             currentTool === 'pencil' ? 'pencil' :
+                             currentTool === 'skin' ? 'skin' :
+                             currentTool === 'gemstone' ? 'gemstone' : 'round';
+            
+            const brush = getBrushTexture(size, brushType);
+            
+            ctx.save();
+            ctx.translate(x, y);
+            
+            if (currentTool === 'eraser') {
+                ctx.globalCompositeOperation = 'destination-out';
+            }
+            
+            ctx.drawImage(brush, -size, -size);
+            ctx.restore();
+            
+            ctx.globalAlpha = 1;
+            ctx.globalCompositeOperation = 'source-over';
+        }
+
+        // Drawing Handlers
         function getPos(e) {
             const rect = canvas.getBoundingClientRect();
-            const scaleX = canvas.width / rect.width;
-            const scaleY = canvas.height / rect.height;
+            const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+            const clientY = e.touches ? e.touches[0].clientY : e.clientY;
             return {
-                x: (e.clientX - rect.left) * scaleX,
-                y: (e.clientY - rect.top) * scaleY
+                x: clientX - rect.left,
+                y: clientY - rect.top
             };
         }
 
         function startDrawing(e) {
-            isDrawing = true;
+            e.preventDefault();
             const pos = getPos(e);
-            ctx.beginPath();
-            ctx.moveTo(pos.x, pos.y);
-            playSound('draw');
+            
+            if (currentTool === 'select' || currentTool === 'lasso') {
+                startSelection(pos.x, pos.y);
+                return;
+            }
+            
+            isDrawing = true;
+            lastX = pos.x;
+            lastY = pos.y;
+            lastTime = Date.now();
+            
+            saveState();
+            drawBrush(pos.x, pos.y);
         }
 
         function draw(e) {
-            if (!isDrawing) return;
+            e.preventDefault();
             const pos = getPos(e);
             
-            ctx.lineWidth = currentSize;
-            ctx.lineCap = 'round';
-            ctx.lineJoin = 'round';
-            ctx.strokeStyle = currentColor;
-            
-            if (currentTool === 'eraser') {
-                ctx.globalCompositeOperation = 'destination-out';
-            } else {
-                ctx.globalCompositeOperation = 'source-over';
+            if (currentTool === 'select' || currentTool === 'lasso') {
+                updateSelection(pos.x, pos.y);
+                return;
             }
             
-            ctx.lineTo(pos.x, pos.y);
-            ctx.stroke();
+            if (!isDrawing) return;
+            
+            const dist = Math.hypot(pos.x - lastX, pos.y - lastY);
+            const time = Date.now();
+            const velocity = dist / (time - lastTime + 1);
+            const pressure = Math.max(0.2, Math.min(1, 1 - velocity * 0.1));
+            
+            if (dist > brushSize * brushSpacing) {
+                const steps = Math.ceil(dist / (brushSize * brushSpacing));
+                for (let i = 0; i < steps; i++) {
+                    const t = i / steps;
+                    const x = lastX + (pos.x - lastX) * t;
+                    const y = lastY + (pos.y - lastY) * t;
+                    drawBrush(x, y, pressure);
+                }
+                lastX = pos.x;
+                lastY = pos.y;
+                lastTime = time;
+            }
         }
 
-        function stopDrawing() {
-            if (isDrawing) {
-                isDrawing = false;
-                ctx.globalCompositeOperation = 'source-over';
-                saveState();
+        function stopDrawing(e) {
+            if (currentTool === 'select' || currentTool === 'lasso') {
+                endSelection();
+                return;
             }
+            isDrawing = false;
         }
 
         canvas.addEventListener('mousedown', startDrawing);
         canvas.addEventListener('mousemove', draw);
         canvas.addEventListener('mouseup', stopDrawing);
         canvas.addEventListener('mouseout', stopDrawing);
+        
+        canvas.addEventListener('touchstart', startDrawing, { passive: false });
+        canvas.addEventListener('touchmove', draw, { passive: false });
+        canvas.addEventListener('touchend', stopDrawing);
 
-        // Touch support
-        canvas.addEventListener('touchstart', (e) => {
-            e.preventDefault();
-            const touch = e.touches[0];
-            canvas.dispatchEvent(new MouseEvent('mousedown', {
-                clientX: touch.clientX,
-                clientY: touch.clientY
-            }));
-        });
-
-        canvas.addEventListener('touchmove', (e) => {
-            e.preventDefault();
-            const touch = e.touches[0];
-            canvas.dispatchEvent(new MouseEvent('mousemove', {
-                clientX: touch.clientX,
-                clientY: touch.clientY
-            }));
-        });
-
-        canvas.addEventListener('touchend', () => {
-            canvas.dispatchEvent(new MouseEvent('mouseup', {}));
-        });
-
-        // ==================== TOOL FUNCTIONS ====================
-        function setTool(tool) {
-            currentTool = tool;
-            document.querySelectorAll('.mode-btn').forEach(btn => btn.classList.remove('active'));
-            event.target.closest('.mode-btn').classList.add('active');
-        }
-
-        function setColor(color) {
-            currentColor = color;
-            document.querySelectorAll('.color-btn').forEach(btn => btn.classList.remove('active'));
-            event.target.classList.add('active');
-        }
-
-        function setBrushSize(size) {
-            currentSize = parseInt(size);
-        }
-
-        // ==================== CHARACTER SYSTEM ====================
-        const characters = {
-            chibi: { emoji: '🧒', name: 'Chibi' },
-            anime: { emoji: '👧', name: 'Anime Girl' },
-            boy: { emoji: '👦', name: 'Boy' },
-            girl: { emoji: '👩', name: 'Girl' },
-            cat: { emoji: '🐱', name: 'Cat' },
-            dog: { emoji: '🐶', name: 'Dog' }
-        };
-
-        let currentCharacter = 'chibi';
-        let characterAccessories = {};
-
-        function selectCharacter(char) {
-            currentCharacter = char;
-            document.querySelectorAll('.character-thumb').forEach(thumb => thumb.classList.remove('active'));
-            event.target.classList.add('active');
-            drawCharacter();
-        }
-
-        function setAccessory(type, style) {
-            characterAccessories[type] = style;
-            document.querySelectorAll('.item-btn').forEach(btn => btn.classList.remove('active'));
-            event.target.classList.add('active');
-            drawCharacter();
-            playSound('pop');
-        }
-
-        function setSkinColor(color) {
-            // Apply skin color logic
-            drawCharacter();
-        }
-
-        function setHairColor(color) {
-            // Apply hair color logic
-            drawCharacter();
-        }
-
-        function drawCharacter() {
-            ctx.fillStyle = '#ffffff';
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-            
-            const centerX = canvas.width / 2;
-            const centerY = canvas.height / 2;
-            
-            // Draw character emoji large
-            ctx.font = '200px Arial';
-            ctx.textAlign = 'center';
-            ctx.textBaseline = 'middle';
-            ctx.fillText(characters[currentCharacter].emoji, centerX, centerY);
-            
-            // Draw accessories
-            if (characterAccessories.acc) {
-                ctx.font = '80px Arial';
-                ctx.fillText(getAccessoryEmoji(characterAccessories.acc), centerX + 80, centerY - 80);
-            }
-        }
-
-        function getAccessoryEmoji(acc) {
-            const emojis = {
-                glasses: '👓', hat: '🎩', bow: '🎀', crown: '👑'
-            };
-            return emojis[acc] || '';
-        }
-
-        // ==================== ANIMATION SYSTEM ====================
-        let keyframes = [];
-        let currentFrame = 0;
-        let isPlaying = false;
-        let fps = 24;
-        let mediaRecorder = null;
-        let recordedChunks = [];
-
-        function addKeyframe() {
-            keyframes.push(canvas.toDataURL());
-            updateTimeline();
-            playSound('ding');
-        }
-
-        function updateTimeline() {
-            const framesContainer = document.getElementById('timelineFrames');
-            framesContainer.innerHTML = '';
-            keyframes.forEach((_, i) => {
-                const marker = document.createElement('div');
-                marker.className = 'frame-marker' + (i === currentFrame ? ' active' : '');
-                framesContainer.appendChild(marker);
-            });
-            document.getElementById('totalFrames').textContent = '/ ' + keyframes.length;
-        }
-
-        function playAnimation() {
-            if (keyframes.length < 2) return;
-            isPlaying = true;
-            let frame = 0;
-            const interval = setInterval(() => {
-                if (!isPlaying || frame >= keyframes.length) {
-                    clearInterval(interval);
-                    isPlaying = false;
-                    return;
-                }
-                loadKeyframe(frame);
-                frame++;
-            }, 1000 / fps);
-        }
-
-        function stopAnimation() {
-            isPlaying = false;
-        }
-
-        function loadKeyframe(index) {
-            if (index < 0 || index >= keyframes.length) return;
-            const img = new Image();
-            img.onload = () => {
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
-                ctx.drawImage(img, 0, 0);
-            };
-            img.src = keyframes[index];
-            currentFrame = index;
-            document.getElementById('currentFrame').textContent = index + 1;
-            updateTimeline();
-        }
-
-        function prevFrame() {
-            if (currentFrame > 0) loadKeyframe(currentFrame - 1);
-        }
-
-        function nextFrame() {
-            if (currentFrame < keyframes.length - 1) loadKeyframe(currentFrame + 1);
-        }
-
-        function togglePlay() {
-            if (isPlaying) stopAnimation();
-            else playAnimation();
-        }
-
-        function clearAnimation() {
-            keyframes = [];
-            currentFrame = 0;
-            updateTimeline();
-        }
-
-        function setFPS(value) {
-            fps = parseInt(value);
-        }
-
-        function setOnionSkin(value) {
-            // Onion skin opacity logic
-        }
-
-        // ==================== VIDEO RECORDING ====================
-        function toggleRecording() {
-            const btn = document.getElementById('recordBtn');
-            if (mediaRecorder && mediaRecorder.state === 'recording') {
-                stopRecording();
-                btn.classList.remove('record');
-                btn.textContent = '⏺️';
-            } else {
-                startRecording();
-                btn.classList.add('record');
-                btn.textContent = '⏹️';
-            }
-        }
-
-        function startRecording() {
-            const stream = canvas.captureStream(fps);
-            mediaRecorder = new MediaRecorder(stream, {
-                mimeType: 'video/webm;codecs=vp9'
-            });
-            
-            recordedChunks = [];
-            mediaRecorder.ondataavailable = (e) => {
-                if (e.data.size > 0) recordedChunks.push(e.data);
-            };
-            
-            mediaRecorder.onstop = () => {
-                const blob = new Blob(recordedChunks, { type: 'video/webm' });
-                const url = URL.createObjectURL(blob);
-                const a = document.createElement('a');
-                a.href = url;
-                a.download = 'animation.webm';
-                a.click();
-                URL.revokeObjectURL(url);
-            };
-            
-            mediaRecorder.start();
-            playSound('magic');
-        }
-
-        function stopRecording() {
-            if (mediaRecorder) mediaRecorder.stop();
-        }
-
-        // ==================== EXPORT FUNCTIONS ====================
-        function exportImage() {
-            const link = document.createElement('a');
-            link.download = 'artwork.png';
-            link.href = canvas.toDataURL();
-            link.click();
-            playSound('ding');
-        }
-
-        function exportVideo() {
-            if (keyframes.length < 2) {
-                alert('Add at least 2 keyframes first!');
+        // Selection & Move Tool
+        function startSelection(x, y) {
+            if (selection && x >= selection.x && x <= selection.x + selection.width &&
+                y >= selection.y && y <= selection.y + selection.height) {
+                isMoving = true;
+                moveOffset = { x: x - selection.x, y: y - selection.y };
                 return;
             }
-            // Compile keyframes into video
-            playAnimation();
-            setTimeout(() => {
-                startRecording();
-                setTimeout(stopRecording, (keyframes.length / fps) * 1000);
-            }, 100);
+            
+            isSelecting = true;
+            selectionStart = { x, y };
+            selection = { x, y, width: 0, height: 0 };
+            updateSelectionBox();
         }
 
-        function exportGIF() {
-            alert('GIF export coming soon! Use video export for now.');
+        function updateSelection(x, y) {
+            if (isMoving && selectedContent) {
+                selection.x = x - moveOffset.x;
+                selection.y = y - moveOffset.y;
+                updateSelectionBox();
+                drawSelectionContent();
+                return;
+            }
+            
+            if (!isSelecting) return;
+            
+            selection.width = Math.abs(x - selectionStart.x);
+            selection.height = Math.abs(y - selectionStart.y);
+            selection.x = Math.min(x, selectionStart.x);
+            selection.y = Math.min(y, selectionStart.y);
+            updateSelectionBox();
         }
 
-        // ==================== MODE SWITCHING ====================
-        function setMode(mode) {
-            currentMode = mode;
-            
-            // Update tabs
-            document.querySelectorAll('.nav-tab').forEach(tab => tab.classList.remove('active'));
-            event.target.classList.add('active');
-            
-            // Show/hide panels
-            document.getElementById('drawPanel').style.display = mode === 'draw' ? 'block' : 'none';
-            document.getElementById('characterPanel').style.display = mode === 'character' ? 'block' : 'none';
-            document.getElementById('animatePanel').style.display = mode === 'animate' ? 'block' : 'none';
-            
-            // Show/hide animation tools
-            document.getElementById('animTools').style.display = mode === 'animate' ? 'flex' : 'none';
-            document.getElementById('timeline').style.display = mode === 'animate' ? 'flex' : 'none';
-            
-            // Update title
-            const titles = {
-                draw: 'Drawing Canvas',
-                character: 'Character Creator',
-                animate: 'Animation Timeline'
-            };
-            document.getElementById('canvasTitle').textContent = titles[mode];
-            
-            playSound('whoosh');
+        function endSelection() {
+            if (isSelecting) {
+                isSelecting = false;
+                if (selection.width > 10 && selection.height > 10) {
+                    captureSelection();
+                }
+            }
+            isMoving = false;
         }
 
-        // ==================== UNDO/REDO ====================
-        let history = [];
-        let historyStep = -1;
+        function updateSelectionBox() {
+            const box = document.getElementById('selectionBox');
+            if (selection && (selection.width > 0 || isMoving)) {
+                box.style.display = 'block';
+                box.style.left = selection.x + 'px';
+                box.style.top = selection.y + 'px';
+                box.style.width = selection.width + 'px';
+                box.style.height = selection.height + 'px';
+            } else {
+                box.style.display = 'none';
+            }
+        }
 
+        function captureSelection() {
+            const imageData = ctx.getImageData(selection.x, selection.y, selection.width, selection.height);
+            selectedContent = document.createElement('canvas');
+            selectedContent.width = selection.width;
+            selectedContent.height = selection.height;
+            selectedContent.getContext('2d').putImageData(imageData, 0, 0);
+            
+            // Clear original area
+            ctx.clearRect(selection.x, selection.y, selection.width, selection.height);
+            saveState();
+        }
+
+        function drawSelectionContent() {
+            if (!selectedContent) return;
+            tempCtx.clearRect(0, 0, tempCanvas.width, tempCanvas.height);
+            tempCtx.drawImage(selectedContent, selection.x, selection.y);
+        }
+
+        // History Management
         function saveState() {
             historyStep++;
-            if (historyStep < history.length) history.length = historyStep;
+            if (historyStep < history.length) {
+                history.length = historyStep;
+            }
             history.push(canvas.toDataURL());
-            if (history.length > 20) {
+            if (history.length > 30) {
                 history.shift();
                 historyStep--;
             }
+            document.getElementById('historyCount').textContent = historyStep;
         }
 
         function undo() {
             if (historyStep > 0) {
                 historyStep--;
                 restoreState();
-                playSound('pop');
             }
         }
 
@@ -1198,42 +1262,151 @@
             if (historyStep < history.length - 1) {
                 historyStep++;
                 restoreState();
-                playSound('pop');
             }
         }
 
         function restoreState() {
             const img = new Image();
+            img.src = history[historyStep];
             img.onload = () => {
                 ctx.clearRect(0, 0, canvas.width, canvas.height);
                 ctx.drawImage(img, 0, 0);
             };
-            img.src = history[historyStep];
+            document.getElementById('historyCount').textContent = historyStep;
         }
 
-        function saveProject() {
-            localStorage.setItem('creatingartonline-project', JSON.stringify({
-                history: history,
-                keyframes: keyframes,
-                character: currentCharacter,
-                accessories: characterAccessories
-            }));
-            playSound('ding');
-            alert('Project saved!');
+        function clearCanvas() {
+            saveState();
+            ctx.fillStyle = '#ffffff';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
         }
 
-        // ==================== MODAL ====================
-        function useCharacter() {
-            closeModal();
-            setMode('animate');
+        // Light Editing
+        function applyLightEdits() {
+            saveState();
+            const brightness = parseInt(document.getElementById('brightness').value);
+            const contrast = parseInt(document.getElementById('contrast').value);
+            const saturation = parseInt(document.getElementById('saturation').value);
+            const blur = parseInt(document.getElementById('blur').value);
+            
+            const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+            const data = imageData.data;
+            
+            for (let i = 0; i < data.length; i += 4) {
+                // Brightness
+                data[i] += brightness;
+                data[i + 1] += brightness;
+                data[i + 2] += brightness;
+                
+                // Contrast
+                const factor = (259 * (contrast + 255)) / (255 * (259 - contrast));
+                data[i] = factor * (data[i] - 128) + 128;
+                data[i + 1] = factor * (data[i + 1] - 128) + 128;
+                data[i + 2] = factor * (data[i + 2] - 128) + 128;
+                
+                // Clamp values
+                data[i] = Math.max(0, Math.min(255, data[i]));
+                data[i + 1] = Math.max(0, Math.min(255, data[i + 1]));
+                data[i + 2] = Math.max(0, Math.min(255, data[i + 2]));
+            }
+            
+            ctx.putImageData(imageData, 0, 0);
+            
+            // Apply blur if needed
+            if (blur > 0) {
+                ctx.filter = `blur(${blur}px)`;
+                ctx.drawImage(canvas, 0, 0);
+                ctx.filter = 'none';
+            }
         }
 
-        function closeModal() {
-            document.getElementById('characterModal').classList.remove('active');
+        // Layer Management
+        function addLayer() {
+            const newCanvas = document.createElement('canvas');
+            newCanvas.width = canvas.width;
+            newCanvas.height = canvas.height;
+            const newCtx = newCanvas.getContext('2d');
+            
+            layers.push({ canvas: newCanvas, ctx: newCtx, visible: true, opacity: 1 });
+            updateLayersList();
         }
+
+        function updateLayersList() {
+            const list = document.getElementById('layersList');
+            list.innerHTML = layers.map((layer, i) => `
+                <div class="layer-item ${i === currentLayer ? 'active' : ''}" data-layer="${i}" onclick="selectLayer(${i})">
+                    <div class="layer-thumb" style="background: ${i === 0 ? '#fff' : 'transparent'}"></div>
+                    <div class="layer-info">
+                        <div class="layer-name">Layer ${i + 1}</div>
+                        <div class="layer-opacity">${Math.round(layer.opacity * 100)}%</div>
+                    </div>
+                    <div class="layer-visibility" onclick="toggleLayerVisibility(${i}, event)">
+                        ${layer.visible ? '👁️' : '🚫'}
+                    </div>
+                </div>
+            `).reverse().join('');
+        }
+
+        function selectLayer(index) {
+            currentLayer = index;
+            updateLayersList();
+        }
+
+        function toggleLayerVisibility(index, e) {
+            e.stopPropagation();
+            layers[index].visible = !layers[index].visible;
+            updateLayersList();
+        }
+
+        // Export
+        function exportImage() {
+            const link = document.createElement('a');
+            link.download = 'artflow-creation.png';
+            link.href = canvas.toDataURL();
+            link.click();
+        }
+
+        // Mobile Menu
+        function toggleProperties() {
+            document.getElementById('propertiesPanel').classList.toggle('open');
+        }
+
+        // Keyboard Shortcuts
+        document.addEventListener('keydown', (e) => {
+            if (e.ctrlKey || e.metaKey) {
+                if (e.key === 'z') {
+                    e.preventDefault();
+                    undo();
+                } else if (e.key === 'y' || (e.key === 'z' && e.shiftKey)) {
+                    e.preventDefault();
+                    redo();
+                }
+            }
+        });
 
         // Initialize
-        saveState();
+        window.onload = () => {
+            setTimeout(() => {
+                document.getElementById('loading').classList.add('hidden');
+                saveState();
+            }, 1000);
+        };
+
+        // Update cursor based on tool
+        function updateCursor() {
+            if (currentTool === 'select' || currentTool === 'lasso') {
+                canvas.style.cursor = 'crosshair';
+            } else {
+                canvas.style.cursor = 'none';
+            }
+        }
+
+        // Custom cursor follower
+        document.addEventListener('mousemove', (e) => {
+            if (currentTool !== 'select' && currentTool !== 'lasso') {
+                // Could add custom brush cursor preview here
+            }
+        });
     </script>
 </body>
 </html>
