@@ -3,110 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <!-- Security Meta Tags -->
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="referrer" content="strict-origin-when-cross-origin">
-    
-    <!-- Primary Meta Tags -->
-    <title>Create Art Online | Free Digital Drawing Studio & Canvas</title>
-    <meta name="title" content="Create Art Online | Free Digital Drawing Studio & Canvas">
-    <meta name="description" content="Create stunning digital art online with our free drawing studio. Professional canvas tools, brushes, shapes & colors. No download required. Start drawing instantly at CreatingArtOnline.com!">
-    <meta name="keywords" content="create art online, digital drawing, online canvas, free drawing tool, digital art studio, paint online, sketch online, browser drawing app">
-    <meta name="author" content="CreatingArtOnline.com">
-    <meta name="robots" content="index, follow">
-    <meta name="language" content="English">
-    
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://creatingartonline.com/">
-    <meta property="og:title" content="Create Art Online | Free Digital Drawing Studio">
-    <meta property="og:description" content="Professional digital drawing tools right in your browser. Create, sketch & paint online for free. No signup required!">
-    <meta property="og:site_name" content="CreatingArtOnline.com">
-    
-    <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://creatingartonline.com/">
-    <meta property="twitter:title" content="Create Art Online | Free Digital Drawing Studio">
-    <meta property="twitter:description" content="Professional digital drawing tools right in your browser. Create, sketch & paint online for free!">
-    
-    <!-- Canonical URL -->
-    <link rel="canonical" href="https://creatingartonline.com/">
-    
-    <!-- DNS Prefetch and Preconnect -->
-    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
-    <link rel="dns-prefetch" href="https://fonts.gstatic.com">
-    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    
-    <!-- Fonts with Subresource Integrity (SRI) -->
+    <title>CreatingArtOnline - Animation Studio & Character Creator</title>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    
-    <!-- Structured Data -->
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "WebApplication",
-        "name": "Create Art Online",
-        "url": "https://creatingartonline.com",
-        "description": "Free online digital drawing studio with professional canvas tools",
-        "applicationCategory": "GraphicsApplication",
-        "operatingSystem": "Any",
-        "offers": {
-            "@type": "Offer",
-            "price": "0",
-            "priceCurrency": "USD"
-        },
-        "featureList": "Digital canvas, Brush tools, Shape tools, Color picker, Export to PNG",
-        "softwareVersion": "1.0",
-        "aggregateRating": {
-            "@type": "AggregateRating",
-            "ratingValue": "4.8",
-            "ratingCount": "1250"
-        }
-    }
-    </script>
-    
     <style>
-        /* [CSS remains the same as previous version] */
-        /* Copy all CSS from the previous index.html file */
         :root {
             --primary: #6366f1;
-            --primary-dark: #4f46e5;
             --secondary: #ec4899;
             --accent: #f59e0b;
             --dark: #0f172a;
             --darker: #020617;
-            --light: #f8fafc;
-            --gray: #64748b;
-            --success: #10b981;
-            --gradient-primary: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #ec4899 100%);
-            --gradient-dark: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
-            --shadow-glow: 0 0 40px rgba(99, 102, 241, 0.3);
+            --gradient: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #ec4899 100%);
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
         body {
             font-family: 'Outfit', sans-serif;
             background: var(--darker);
-            color: var(--light);
-            line-height: 1.6;
+            color: white;
             overflow-x: hidden;
-        }
-
-        h1, h2, h3, h4 {
-            font-family: 'Space Grotesk', sans-serif;
-            font-weight: 700;
-            line-height: 1.2;
         }
 
         /* Navigation */
@@ -114,522 +29,309 @@
             position: fixed;
             top: 0;
             width: 100%;
-            padding: 20px 5%;
+            padding: 15px 5%;
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(20px);
             display: flex;
             justify-content: space-between;
             align-items: center;
             z-index: 1000;
-            background: rgba(15, 23, 42, 0.8);
-            backdrop-filter: blur(20px);
             border-bottom: 1px solid rgba(255,255,255,0.1);
-            transition: all 0.3s;
-        }
-
-        nav.scrolled {
-            padding: 15px 5%;
-            background: rgba(15, 23, 42, 0.95);
         }
 
         .logo {
             font-family: 'Space Grotesk', sans-serif;
-            font-size: 26px;
-            font-weight: 700;
-            background: var(--gradient-primary);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            text-decoration: none;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 40px;
-            list-style: none;
-        }
-
-        .nav-links a {
-            color: rgba(255,255,255,0.8);
-            text-decoration: none;
-            font-weight: 500;
-            transition: all 0.3s;
-            position: relative;
-            font-size: 15px;
-        }
-
-        .nav-links a:hover {
-            color: var(--primary);
-        }
-
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--gradient-primary);
-            transition: width 0.3s;
-        }
-
-        .nav-links a:hover::after {
-            width: 100%;
-        }
-
-        .nav-cta {
-            padding: 12px 28px;
-            background: var(--gradient-primary);
-            color: white;
-            border: none;
-            border-radius: 30px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s;
-            text-decoration: none;
-            font-size: 15px;
-            box-shadow: 0 4px 15px rgba(99, 102, 241, 0.4);
-        }
-
-        .nav-cta:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(99, 102, 241, 0.5);
-        }
-
-        .mobile-menu-btn {
-            display: none;
-            background: none;
-            border: none;
-            color: white;
             font-size: 24px;
-            cursor: pointer;
+            font-weight: 700;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
-        /* Hero Section */
-        .hero {
-            min-height: 100vh;
+        .nav-tabs {
             display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            padding: 120px 5% 80px;
-            overflow: hidden;
+            gap: 10px;
         }
 
-        .hero-bg {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: 
-                radial-gradient(circle at 20% 50%, rgba(99, 102, 241, 0.15) 0%, transparent 50%),
-                radial-gradient(circle at 80% 80%, rgba(236, 72, 153, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 40% 20%, rgba(139, 92, 246, 0.1) 0%, transparent 50%);
-            z-index: 0;
-        }
-
-        .hero-grid {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            background-image: 
-                linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
-            background-size: 50px 50px;
-            z-index: 1;
-        }
-
-        .hero-content {
-            text-align: center;
-            z-index: 2;
-            max-width: 900px;
-            position: relative;
-        }
-
-        .badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 8px 20px;
-            background: rgba(99, 102, 241, 0.1);
-            border: 1px solid rgba(99, 102, 241, 0.3);
-            border-radius: 50px;
-            font-size: 14px;
-            color: var(--primary);
-            margin-bottom: 30px;
+        .nav-tab {
+            padding: 10px 20px;
+            background: rgba(255,255,255,0.1);
+            border: none;
+            border-radius: 20px;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s;
             font-weight: 500;
         }
 
-        .hero h1 {
-            font-size: clamp(40px, 6vw, 72px);
-            margin-bottom: 24px;
-            line-height: 1.1;
-            background: linear-gradient(to right, #fff 0%, #cbd5e1 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+        .nav-tab:hover, .nav-tab.active {
+            background: var(--gradient);
         }
 
-        .hero h1 span {
-            background: var(--gradient-primary);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .hero p {
-            font-size: 20px;
-            color: rgba(255,255,255,0.7);
-            margin-bottom: 40px;
-            line-height: 1.6;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .hero-buttons {
-            display: flex;
+        /* Main Container */
+        .studio-container {
+            margin-top: 70px;
+            padding: 20px;
+            display: grid;
+            grid-template-columns: 280px 1fr 300px;
             gap: 20px;
-            justify-content: center;
-            margin-bottom: 60px;
-            flex-wrap: wrap;
+            height: calc(100vh - 70px);
         }
 
-        .btn-primary {
-            padding: 16px 40px;
-            background: var(--gradient-primary);
-            color: white;
-            border: none;
-            border-radius: 30px;
-            font-weight: 600;
-            font-size: 16px;
-            cursor: pointer;
-            transition: all 0.3s;
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            box-shadow: 0 4px 20px rgba(99, 102, 241, 0.4);
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 30px rgba(99, 102, 241, 0.5);
-        }
-
-        .btn-secondary {
-            padding: 16px 40px;
-            background: transparent;
-            color: white;
-            border: 2px solid rgba(255,255,255,0.2);
-            border-radius: 30px;
-            font-weight: 600;
-            font-size: 16px;
-            cursor: pointer;
-            transition: all 0.3s;
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .btn-secondary:hover {
-            background: rgba(255,255,255,0.1);
-            border-color: rgba(255,255,255,0.4);
-        }
-
-        .hero-stats {
-            display: flex;
-            justify-content: center;
-            gap: 60px;
-            margin-top: 40px;
-            flex-wrap: wrap;
-        }
-
-        .stat {
-            text-align: center;
-        }
-
-        .stat-number {
-            font-size: 42px;
-            font-weight: 800;
-            background: var(--gradient-primary);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            line-height: 1;
-        }
-
-        .stat-label {
-            color: rgba(255,255,255,0.6);
-            font-size: 14px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-top: 5px;
-        }
-
-        /* Drawing App Section */
-        .studio-section {
-            padding: 100px 5%;
-            background: var(--dark);
-            position: relative;
-        }
-
-        .section-header {
-            text-align: center;
-            margin-bottom: 60px;
-            max-width: 700px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .section-header h2 {
-            font-size: clamp(32px, 4vw, 48px);
-            margin-bottom: 16px;
-        }
-
-        .section-header p {
-            color: rgba(255,255,255,0.6);
-            font-size: 18px;
-        }
-
-        .drawing-app {
-            max-width: 1400px;
-            margin: 0 auto;
-            background: rgba(255,255,255,0.03);
-            border-radius: 24px;
-            overflow: hidden;
-            box-shadow: var(--shadow-glow), 0 25px 80px rgba(0,0,0,0.5);
-            border: 1px solid rgba(255,255,255,0.1);
-        }
-
-        .app-header {
-            background: rgba(0,0,0,0.3);
-            padding: 20px 30px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-            flex-wrap: wrap;
-            gap: 20px;
-        }
-
-        .app-title {
-            font-size: 20px;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            color: white;
-        }
-
-        .app-title span {
-            font-size: 28px;
-        }
-
-        .app-tools {
-            display: flex;
-            gap: 12px;
-            flex-wrap: wrap;
-        }
-
-        .tool-btn {
-            width: 48px;
-            height: 48px;
-            border: none;
-            background: rgba(255,255,255,0.1);
-            color: white;
-            border-radius: 12px;
-            cursor: pointer;
-            font-size: 22px;
-            transition: all 0.3s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-        }
-
-        .tool-btn:hover, .tool-btn.active {
-            background: var(--primary);
-            transform: translateY(-2px);
-            box-shadow: 0 4px 15px rgba(99, 102, 241, 0.4);
-        }
-
-        .app-body {
-            display: flex;
-            height: 700px;
-        }
-
-        .tools-panel {
-            width: 300px;
-            background: rgba(0,0,0,0.2);
-            padding: 30px;
+        /* Left Panel - Tools & Characters */
+        .left-panel {
+            background: rgba(255,255,255,0.05);
+            border-radius: 20px;
+            padding: 20px;
             overflow-y: auto;
-            border-right: 1px solid rgba(255,255,255,0.1);
         }
 
         .panel-section {
-            margin-bottom: 30px;
+            margin-bottom: 25px;
         }
 
         .panel-title {
             font-size: 12px;
             text-transform: uppercase;
-            letter-spacing: 1.5px;
             color: rgba(255,255,255,0.5);
             margin-bottom: 15px;
+            letter-spacing: 1px;
             font-weight: 600;
         }
 
-        .color-grid {
-            display: grid;
-            grid-template-columns: repeat(5, 1fr);
-            gap: 10px;
-            margin-bottom: 15px;
-        }
-
-        .color-btn {
-            width: 42px;
-            height: 42px;
-            border-radius: 50%;
-            border: 3px solid transparent;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-
-        .color-btn:hover { transform: scale(1.1); }
-        .color-btn.active { 
-            border-color: white; 
-            box-shadow: 0 0 0 2px var(--primary);
-        }
-
-        .color-custom-wrapper {
-            position: relative;
-            height: 50px;
-            border-radius: 12px;
-            overflow: hidden;
-        }
-
-        .color-custom {
-            width: 100%;
-            height: 100%;
-            border: none;
-            cursor: pointer;
-            padding: 0;
-        }
-
-        .slider-group {
-            margin-bottom: 20px;
-        }
-
-        .slider-header {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 10px;
-            font-size: 14px;
-            color: rgba(255,255,255,0.8);
-        }
-
-        .slider {
-            width: 100%;
-            height: 6px;
-            border-radius: 3px;
-            background: rgba(255,255,255,0.1);
-            outline: none;
-            -webkit-appearance: none;
-        }
-
-        .slider::-webkit-slider-thumb {
-            -webkit-appearance: none;
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            background: var(--primary);
-            cursor: pointer;
-            box-shadow: 0 0 10px rgba(99, 102, 241, 0.5);
-            transition: transform 0.2s;
-        }
-
-        .slider::-webkit-slider-thumb:hover {
-            transform: scale(1.2);
-        }
-
-        .preview-box {
-            width: 100%;
-            height: 80px;
-            background: rgba(0,0,0,0.3);
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-top: 15px;
-            border: 1px solid rgba(255,255,255,0.1);
-        }
-
-        .brush-preview {
-            background: var(--primary);
-            border-radius: 50%;
-            transition: all 0.2s;
-        }
-
-        .action-group {
+        /* Mode Selection */
+        .mode-buttons {
             display: flex;
             flex-direction: column;
             gap: 10px;
         }
 
-        .panel-btn {
-            padding: 12px;
-            border: none;
-            border-radius: 10px;
-            font-weight: 600;
+        .mode-btn {
+            padding: 15px;
+            background: rgba(255,255,255,0.1);
+            border: 2px solid transparent;
+            border-radius: 12px;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 14px;
+        }
+
+        .mode-btn:hover, .mode-btn.active {
+            border-color: var(--primary);
+            background: rgba(99, 102, 241, 0.2);
+        }
+
+        .mode-btn span {
+            font-size: 20px;
+        }
+
+        /* Character Selector */
+        .character-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+
+        .character-thumb {
+            aspect-ratio: 1;
+            background: rgba(255,255,255,0.1);
+            border-radius: 12px;
             cursor: pointer;
             transition: all 0.3s;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 8px;
-            font-size: 14px;
+            font-size: 40px;
+            border: 2px solid transparent;
         }
 
-        .panel-btn.secondary {
+        .character-thumb:hover, .character-thumb.active {
+            border-color: var(--primary);
+            transform: scale(1.05);
+        }
+
+        /* Dress Up Items */
+        .item-category {
+            margin-bottom: 15px;
+        }
+
+        .category-label {
+            font-size: 11px;
+            color: rgba(255,255,255,0.6);
+            margin-bottom: 8px;
+        }
+
+        .item-row {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .item-btn {
+            width: 50px;
+            height: 50px;
+            background: rgba(255,255,255,0.1);
+            border: 2px solid transparent;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+        }
+
+        .item-btn:hover, .item-btn.active {
+            border-color: var(--secondary);
+            background: rgba(236, 72, 153, 0.2);
+        }
+
+        /* Color Picker */
+        .color-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 8px;
+        }
+
+        .color-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 3px solid transparent;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .color-btn:hover { transform: scale(1.1); }
+        .color-btn.active { border-color: white; box-shadow: 0 0 0 2px var(--primary); }
+
+        /* Center - Canvas Area */
+        .canvas-area {
+            background: rgba(0,0,0,0.3);
+            border-radius: 20px;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .canvas-header {
+            padding: 15px 20px;
+            background: rgba(255,255,255,0.05);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .canvas-title {
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .playback-controls {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .control-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: none;
             background: rgba(255,255,255,0.1);
             color: white;
+            cursor: pointer;
+            font-size: 18px;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
-        .panel-btn.secondary:hover {
-            background: rgba(255,255,255,0.2);
+        .control-btn:hover {
+            background: var(--primary);
+            transform: scale(1.1);
         }
 
-        .panel-btn.danger {
-            background: rgba(239, 68, 68, 0.2);
-            color: #ef4444;
+        .control-btn.record {
+            background: #ef4444;
+            animation: pulse 2s infinite;
         }
 
-        .panel-btn.danger:hover {
-            background: rgba(239, 68, 68, 0.3);
+        @keyframes pulse {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7); }
+            50% { box-shadow: 0 0 0 10px rgba(239, 68, 68, 0); }
+        }
+
+        .timeline {
+            height: 60px;
+            background: rgba(255,255,255,0.05);
+            border-top: 1px solid rgba(255,255,255,0.1);
+            display: flex;
+            align-items: center;
+            padding: 0 20px;
+            gap: 10px;
+        }
+
+        .timeline-track {
+            flex: 1;
+            height: 30px;
+            background: rgba(0,0,0,0.3);
+            border-radius: 15px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .timeline-progress {
+            height: 100%;
+            background: var(--gradient);
+            width: 0%;
+            transition: width 0.1s;
+        }
+
+        .timeline-frames {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            display: flex;
+        }
+
+        .frame-marker {
+            flex: 1;
+            border-right: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .frame-marker.active {
+            background: rgba(99, 102, 241, 0.5);
         }
 
         .canvas-wrapper {
             flex: 1;
-            background: #0a0a0a;
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 40px;
             position: relative;
+            padding: 20px;
         }
 
-        #drawingCanvas {
+        #mainCanvas {
             background: white;
             border-radius: 12px;
             box-shadow: 0 20px 60px rgba(0,0,0,0.5);
-            cursor: crosshair;
             max-width: 100%;
             max-height: 100%;
         }
 
-        .floating-actions {
+        /* Animation Tools Overlay */
+        .anim-tools {
             position: absolute;
-            bottom: 30px;
+            bottom: 80px;
             left: 50%;
             transform: translateX(-50%);
             display: flex;
@@ -638,878 +340,502 @@
             padding: 15px 25px;
             border-radius: 50px;
             backdrop-filter: blur(10px);
-            border: 1px solid rgba(255,255,255,0.1);
         }
 
-        .fab {
-            padding: 12px 24px;
-            border: none;
-            border-radius: 25px;
-            font-weight: 600;
+        /* Right Panel - Layers & Properties */
+        .right-panel {
+            background: rgba(255,255,255,0.05);
+            border-radius: 20px;
+            padding: 20px;
+            overflow-y: auto;
+        }
+
+        .layer-list {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .layer-item {
+            padding: 12px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
             cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .layer-item:hover, .layer-item.active {
+            background: rgba(99, 102, 241, 0.3);
+        }
+
+        .layer-icon {
+            width: 30px;
+            height: 30px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .layer-info {
+            flex: 1;
+        }
+
+        .layer-name {
+            font-size: 13px;
+            font-weight: 500;
+        }
+
+        .layer-type {
+            font-size: 11px;
+            color: rgba(255,255,255,0.5);
+        }
+
+        /* Sound Panel */
+        .sound-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+        }
+
+        .sound-btn {
+            aspect-ratio: 1;
+            background: rgba(255,255,255,0.1);
+            border: none;
+            border-radius: 10px;
+            color: white;
+            cursor: pointer;
+            font-size: 20px;
+            transition: all 0.3s;
+        }
+
+        .sound-btn:hover {
+            background: var(--accent);
+            transform: scale(1.1);
+        }
+
+        /* Export Panel */
+        .export-options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .export-btn {
+            padding: 15px;
+            background: var(--gradient);
+            border: none;
+            border-radius: 12px;
+            color: white;
+            cursor: pointer;
+            font-weight: 600;
             transition: all 0.3s;
             display: flex;
             align-items: center;
-            gap: 8px;
-            font-size: 14px;
+            justify-content: center;
+            gap: 10px;
         }
 
-        .fab.secondary {
-            background: rgba(255,255,255,0.1);
-            color: white;
-        }
-
-        .fab.secondary:hover {
-            background: rgba(255,255,255,0.2);
+        .export-btn:hover {
             transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(99, 102, 241, 0.4);
         }
 
-        .fab.primary {
-            background: var(--gradient-primary);
-            color: white;
-            box-shadow: 0 4px 15px rgba(99, 102, 241, 0.4);
-        }
-
-        .fab.primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(99, 102, 241, 0.5);
-        }
-
-        /* Features Section */
-        .features {
-            padding: 100px 5%;
-            background: var(--darker);
-        }
-
-        .features-grid {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 30px;
-        }
-
-        .feature-card {
-            background: rgba(255,255,255,0.03);
-            border: 1px solid rgba(255,255,255,0.1);
-            border-radius: 20px;
-            padding: 40px;
-            transition: all 0.3s;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .feature-card::before {
-            content: '';
-            position: absolute;
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
             top: 0;
             left: 0;
             width: 100%;
-            height: 3px;
-            background: var(--gradient-primary);
-            transform: scaleX(0);
-            transition: transform 0.3s;
-        }
-
-        .feature-card:hover {
-            transform: translateY(-5px);
-            background: rgba(255,255,255,0.08);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
-        }
-
-        .feature-card:hover::before {
-            transform: scaleX(1);
-        }
-
-        .feature-icon {
-            width: 60px;
-            height: 60px;
-            background: var(--gradient-primary);
-            border-radius: 16px;
-            display: flex;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            z-index: 2000;
             align-items: center;
             justify-content: center;
-            font-size: 28px;
-            margin-bottom: 24px;
         }
 
-        .feature-card h3 {
-            font-size: 24px;
-            margin-bottom: 12px;
-            color: white;
+        .modal.active {
+            display: flex;
         }
 
-        .feature-card p {
-            color: rgba(255,255,255,0.6);
-            line-height: 1.6;
-        }
-
-        /* How It Works */
-        .how-it-works {
-            padding: 100px 5%;
+        .modal-content {
             background: var(--dark);
-        }
-
-        .steps {
-            max-width: 1000px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            position: relative;
-        }
-
-        .steps::before {
-            content: '';
-            position: absolute;
-            top: 40px;
-            left: 0;
-            right: 0;
-            height: 2px;
-            background: rgba(255,255,255,0.1);
-            z-index: 0;
-        }
-
-        .step {
-            text-align: center;
-            position: relative;
-            z-index: 1;
-            flex: 1;
-            max-width: 250px;
-        }
-
-        .step-number {
-            width: 80px;
-            height: 80px;
-            background: var(--gradient-primary);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 32px;
-            font-weight: 800;
-            margin: 0 auto 20px;
-            box-shadow: 0 0 30px rgba(99, 102, 241, 0.4);
-        }
-
-        .step h3 {
-            font-size: 20px;
-            margin-bottom: 10px;
-        }
-
-        .step p {
-            color: rgba(255,255,255,0.6);
-            font-size: 15px;
-        }
-
-        /* Testimonials */
-        .testimonials {
-            padding: 100px 5%;
-            background: var(--darker);
-        }
-
-        .testimonials-grid {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 30px;
-        }
-
-        .testimonial {
-            background: rgba(255,255,255,0.03);
-            border: 1px solid rgba(255,255,255,0.1);
-            border-radius: 20px;
             padding: 30px;
+            border-radius: 20px;
+            max-width: 600px;
+            width: 90%;
         }
 
-        .testimonial-text {
-            font-size: 18px;
-            color: rgba(255,255,255,0.9);
-            margin-bottom: 20px;
-            line-height: 1.6;
-            font-style: italic;
-        }
-
-        .testimonial-author {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-
-        .author-avatar {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background: var(--gradient-primary);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 700;
-            font-size: 20px;
-        }
-
-        .author-info h4 {
-            font-size: 16px;
-            margin-bottom: 4px;
-        }
-
-        .author-info p {
-            color: rgba(255,255,255,0.5);
-            font-size: 14px;
-        }
-
-        /* CTA Section */
-        .cta-section {
-            padding: 100px 5%;
-            text-align: center;
-            background: var(--gradient-dark);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .cta-section::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(99, 102, 241, 0.1) 0%, transparent 70%);
-            animation: pulse 4s ease-in-out infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); opacity: 0.5; }
-            50% { transform: scale(1.1); opacity: 0.8; }
-        }
-
-        .cta-content {
-            position: relative;
-            z-index: 1;
-            max-width: 700px;
-            margin: 0 auto;
-        }
-
-        .cta-section h2 {
-            font-size: clamp(32px, 4vw, 48px);
-            margin-bottom: 20px;
-        }
-
-        .cta-section p {
-            color: rgba(255,255,255,0.7);
-            font-size: 18px;
-            margin-bottom: 40px;
-        }
-
-        /* Footer */
-        footer {
-            background: #020617;
-            padding: 60px 5% 30px;
-            border-top: 1px solid rgba(255,255,255,0.1);
-        }
-
-        .footer-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: 2fr 1fr 1fr 1fr;
-            gap: 60px;
-            margin-bottom: 40px;
-        }
-
-        .footer-brand h3 {
+        .modal-title {
             font-size: 24px;
-            margin-bottom: 15px;
-            background: var(--gradient-primary);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .footer-brand p {
-            color: rgba(255,255,255,0.6);
-            line-height: 1.6;
             margin-bottom: 20px;
         }
 
-        .social-links {
-            display: flex;
-            gap: 15px;
-        }
-
-        .social-links a {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
+        .character-preview {
+            width: 200px;
+            height: 200px;
             background: rgba(255,255,255,0.1);
+            border-radius: 20px;
+            margin: 0 auto 20px;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: white;
-            text-decoration: none;
-            transition: all 0.3s;
-        }
-
-        .social-links a:hover {
-            background: var(--primary);
-            transform: translateY(-3px);
-        }
-
-        .footer-links h4 {
-            font-size: 16px;
-            margin-bottom: 20px;
-            color: white;
-        }
-
-        .footer-links ul {
-            list-style: none;
-        }
-
-        .footer-links li {
-            margin-bottom: 12px;
-        }
-
-        .footer-links a {
-            color: rgba(255,255,255,0.6);
-            text-decoration: none;
-            transition: color 0.3s;
-        }
-
-        .footer-links a:hover {
-            color: var(--primary);
-        }
-
-        .footer-bottom {
-            text-align: center;
-            padding-top: 30px;
-            border-top: 1px solid rgba(255,255,255,0.1);
-            color: rgba(255,255,255,0.4);
-            font-size: 14px;
+            font-size: 100px;
         }
 
         /* Responsive */
-        @media (max-width: 1024px) {
-            .app-body { flex-direction: column; height: auto; }
-            .tools-panel { width: 100%; border-right: none; border-bottom: 1px solid rgba(255,255,255,0.1); }
-            .canvas-wrapper { min-height: 500px; }
-            .footer-content { grid-template-columns: 1fr 1fr; }
-            .steps { flex-direction: column; align-items: center; gap: 40px; }
-            .steps::before { display: none; }
-        }
-
-        @media (max-width: 768px) {
-            .nav-links { display: none; }
-            .mobile-menu-btn { display: block; }
-            .hero { padding: 100px 5% 60px; }
-            .hero-buttons { flex-direction: column; align-items: center; }
-            .hero-stats { gap: 30px; }
-            .stat-number { font-size: 32px; }
-            .features-grid, .testimonials-grid { grid-template-columns: 1fr; }
-            .footer-content { grid-template-columns: 1fr; gap: 40px; }
-            .floating-actions { flex-wrap: wrap; justify-content: center; }
+        @media (max-width: 1200px) {
+            .studio-container {
+                grid-template-columns: 1fr;
+                grid-template-rows: auto 1fr auto;
+            }
+            .left-panel, .right-panel {
+                display: none;
+            }
         }
 
         /* Animations */
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
         }
 
-        .animate-in {
-            animation: fadeInUp 0.6s ease-out forwards;
-        }
-
-        /* Toast Notification */
-        .toast {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            background: var(--success);
-            color: white;
-            padding: 16px 24px;
-            border-radius: 12px;
-            font-weight: 600;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-            transform: translateY(100px);
-            opacity: 0;
-            transition: all 0.3s;
-            z-index: 3000;
-        }
-
-        .toast.show {
-            transform: translateY(0);
-            opacity: 1;
-        }
-
-        /* Scrollbar */
-        ::-webkit-scrollbar {
-            width: 8px;
-            height: 8px;
-        }
-
-        ::-webkit-scrollbar-track {
-            background: rgba(255,255,255,0.05);
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: var(--primary);
-            border-radius: 4px;
-        }
-
-        ::-webkit-scrollbar-thumb:hover {
-            background: var(--primary-dark);
+        .animate-bounce {
+            animation: bounce 1s infinite;
         }
     </style>
 </head>
 <body>
     <!-- Navigation -->
-    <nav id="navbar">
-        <a href="#" class="logo">
-            <span>🎨</span>
-            CreatingArtOnline.com
-        </a>
-        
-        <ul class="nav-links">
-            <li><a href="#studio">Drawing Studio</a></li>
-            <li><a href="#features">Features</a></li>
-            <li><a href="#how-it-works">How It Works</a></li>
-            <li><a href="#testimonials">Reviews</a></li>
-        </ul>
-        
-        <a href="#studio" class="nav-cta">Start Drawing</a>
-        
-        <button class="mobile-menu-btn" onclick="toggleMobileMenu()">☰</button>
+    <nav>
+        <div class="logo">🎨 CreatingArtOnline Studio</div>
+        <div class="nav-tabs">
+            <button class="nav-tab active" onclick="setMode('draw')">✏️ Draw</button>
+            <button class="nav-tab" onclick="setMode('character')">👤 Character</button>
+            <button class="nav-tab" onclick="setMode('animate')">🎬 Animate</button>
+        </div>
     </nav>
 
-    <!-- Hero Section -->
-    <section class="hero" id="home">
-        <div class="hero-bg"></div>
-        <div class="hero-grid"></div>
-        
-        <div class="hero-content">
-            <div class="badge">
-                <span>✨</span>
-                Free Online Drawing Tool - No Signup Required
-            </div>
-            
-            <h1>Create Stunning Art <span>Online</span> Instantly</h1>
-            
-            <p>Unleash your creativity with our professional digital drawing studio. Powerful tools, infinite canvas, zero downloads. Start creating masterpieces in seconds.</p>
-            
-            <div class="hero-buttons">
-                <a href="#studio" class="btn-primary">
-                    <span>🎨</span>
-                    Launch Drawing Studio
-                </a>
-                <a href="#features" class="btn-secondary">
-                    <span>📖</span>
-                    Learn More
-                </a>
-            </div>
+    <!-- Main Studio -->
+    <div class="studio-container">
+        <!-- Left Panel -->
+        <div class="left-panel">
+            <!-- Mode: Character Creator -->
+            <div id="characterPanel" class="panel-section" style="display: none;">
+                <div class="panel-title">Choose Character</div>
+                <div class="character-grid">
+                    <div class="character-thumb active" onclick="selectCharacter('chibi')" data-char="chibi">🧒</div>
+                    <div class="character-thumb" onclick="selectCharacter('anime')" data-char="anime">👧</div>
+                    <div class="character-thumb" onclick="selectCharacter('boy')" data-char="boy">👦</div>
+                    <div class="character-thumb" onclick="selectCharacter('girl')" data-char="girl">👩</div>
+                    <div class="character-thumb" onclick="selectCharacter('cat')" data-char="cat">🐱</div>
+                    <div class="character-thumb" onclick="selectCharacter('dog')" data-char="dog">🐶</div>
+                </div>
 
-            <div class="hero-stats">
-                <div class="stat">
-                    <div class="stat-number">100%</div>
-                    <div class="stat-label">Free Forever</div>
-                </div>
-                <div class="stat">
-                    <div class="stat-number">0</div>
-                    <div class="stat-label">Downloads Needed</div>
-                </div>
-                <div class="stat">
-                    <div class="stat-number">∞</div>
-                    <div class="stat-label">Creativity</div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Drawing Studio Section -->
-    <section class="studio-section" id="studio">
-        <div class="section-header">
-            <h2>Professional Drawing Studio</h2>
-            <p>Everything you need to create digital art. Professional tools, intuitive interface, instant results.</p>
-        </div>
-
-        <div class="drawing-app">
-            <div class="app-header">
-                <div class="app-title">
-                    <span>🎨</span>
-                    CreatingArtOnline Studio
-                </div>
+                <div class="panel-title" style="margin-top: 20px;">Dress Up</div>
                 
-                <div class="app-tools">
-                    <button class="tool-btn active" data-tool="brush" title="Brush Tool">✏️</button>
-                    <button class="tool-btn" data-tool="line" title="Line Tool">📏</button>
-                    <button class="tool-btn" data-tool="rect" title="Rectangle Tool">⬜</button>
-                    <button class="tool-btn" data-tool="circle" title="Circle Tool">⭕</button>
-                    <button class="tool-btn" data-tool="eraser" title="Eraser">🧹</button>
+                <div class="item-category">
+                    <div class="category-label">Hair Style</div>
+                    <div class="item-row">
+                        <button class="item-btn" onclick="setAccessory('hair', 'short')">💇</button>
+                        <button class="item-btn" onclick="setAccessory('hair', 'long')">💇‍♀️</button>
+                        <button class="item-btn" onclick="setAccessory('hair', 'spiky')">⚡</button>
+                        <button class="item-btn" onclick="setAccessory('hair', 'ponytail')">🎀</button>
+                    </div>
+                </div>
+
+                <div class="item-category">
+                    <div class="category-label">Outfit</div>
+                    <div class="item-row">
+                        <button class="item-btn" onclick="setAccessory('outfit', 'casual')">👕</button>
+                        <button class="item-btn" onclick="setAccessory('outfit', 'dress')">👗</button>
+                        <button class="item-btn" onclick="setAccessory('outfit', 'suit')">👔</button>
+                        <button class="item-btn" onclick="setAccessory('outfit', 'hero')">🦸</button>
+                    </div>
+                </div>
+
+                <div class="item-category">
+                    <div class="category-label">Accessories</div>
+                    <div class="item-row">
+                        <button class="item-btn" onclick="setAccessory('acc', 'glasses')">👓</button>
+                        <button class="item-btn" onclick="setAccessory('acc', 'hat')">🎩</button>
+                        <button class="item-btn" onclick="setAccessory('acc', 'bow')">🎀</button>
+                        <button class="item-btn" onclick="setAccessory('acc', 'crown')">👑</button>
+                    </div>
+                </div>
+
+                <div class="panel-title" style="margin-top: 20px;">Colors</div>
+                <div class="color-grid">
+                    <button class="color-btn active" style="background: #ffdbac" onclick="setSkinColor('#ffdbac')"></button>
+                    <button class="color-btn" style="background: #f1c27d" onclick="setSkinColor('#f1c27d')"></button>
+                    <button class="color-btn" style="background: #e0ac69" onclick="setSkinColor('#e0ac69')"></button>
+                    <button class="color-btn" style="background: #8d5524" onclick="setSkinColor('#8d5524')"></button>
+                    <button class="color-btn" style="background: #c68642" onclick="setSkinColor('#c68642')"></button>
+                    <button class="color-btn" style="background: #ff0000" onclick="setHairColor('#ff0000')"></button>
+                    <button class="color-btn" style="background: #00ff00" onclick="setHairColor('#00ff00')"></button>
+                    <button class="color-btn" style="background: #0000ff" onclick="setHairColor('#0000ff')"></button>
+                    <button class="color-btn" style="background: #ffff00" onclick="setHairColor('#ffff00')"></button>
+                    <button class="color-btn" style="background: #ff00ff" onclick="setHairColor('#ff00ff')"></button>
                 </div>
             </div>
 
-            <div class="app-body">
-                <div class="tools-panel">
-                    <div class="panel-section">
-                        <div class="panel-title">Colors</div>
-                        <div class="color-grid">
-                            <button class="color-btn active" style="background: #000000" data-color="#000000"></button>
-                            <button class="color-btn" style="background: #ffffff" data-color="#ffffff"></button>
-                            <button class="color-btn" style="background: #ef4444" data-color="#ef4444"></button>
-                            <button class="color-btn" style="background: #f97316" data-color="#f97316"></button>
-                            <button class="color-btn" style="background: #f59e0b" data-color="#f59e0b"></button>
-                            <button class="color-btn" style="background: #84cc16" data-color="#84cc16"></button>
-                            <button class="color-btn" style="background: #10b981" data-color="#10b981"></button>
-                            <button class="color-btn" style="background: #06b6d4" data-color="#06b6d4"></button>
-                            <button class="color-btn" style="background: #3b82f6" data-color="#3b82f6"></button>
-                            <button class="color-btn" style="background: #8b5cf6" data-color="#8b5cf6"></button>
-                            <button class="color-btn" style="background: #d946ef" data-color="#d946ef"></button>
-                            <button class="color-btn" style="background: #f43f5e" data-color="#f43f5e"></button>
-                            <button class="color-btn" style="background: #6366f1" data-color="#6366f1"></button>
-                            <button class="color-btn" style="background: #64748b" data-color="#64748b"></button>
-                            <button class="color-btn" style="background: #94a3b8" data-color="#94a3b8"></button>
+            <!-- Mode: Drawing Tools -->
+            <div id="drawPanel" class="panel-section">
+                <div class="panel-title">Drawing Tools</div>
+                <div class="mode-buttons">
+                    <button class="mode-btn active" onclick="setTool('brush')">
+                        <span>✏️</span> Brush
+                    </button>
+                    <button class="mode-btn" onclick="setTool('pencil')">
+                        <span>✍️</span> Pencil
+                    </button>
+                    <button class="mode-btn" onclick="setTool('marker')">
+                        <span>🖍️</span> Marker
+                    </button>
+                    <button class="mode-btn" onclick="setTool('spray')">
+                        <span>🎨</span> Spray
+                    </button>
+                    <button class="mode-btn" onclick="setTool('eraser')">
+                        <span>🧹</span> Eraser
+                    </button>
+                </div>
+
+                <div class="panel-title" style="margin-top: 20px;">Brush Size</div>
+                <input type="range" min="1" max="100" value="5" style="width: 100%;" oninput="setBrushSize(this.value)">
+
+                <div class="panel-title" style="margin-top: 20px;">Colors</div>
+                <div class="color-grid">
+                    <button class="color-btn active" style="background: #000000" onclick="setColor('#000000')"></button>
+                    <button class="color-btn" style="background: #ffffff" onclick="setColor('#ffffff')"></button>
+                    <button class="color-btn" style="background: #ef4444" onclick="setColor('#ef4444')"></button>
+                    <button class="color-btn" style="background: #f97316" onclick="setColor('#f97316')"></button>
+                    <button class="color-btn" style="background: #f59e0b" onclick="setColor('#f59e0b')"></button>
+                    <button class="color-btn" style="background: #84cc16" onclick="setColor('#84cc16')"></button>
+                    <button class="color-btn" style="background: #10b981" onclick="setColor('#10b981')"></button>
+                    <button class="color-btn" style="background: #06b6d4" onclick="setColor('#06b6d4')"></button>
+                    <button class="color-btn" style="background: #3b82f6" onclick="setColor('#3b82f6')"></button>
+                    <button class="color-btn" style="background: #8b5cf6" onclick="setColor('#8b5cf6')"></button>
+                </div>
+            </div>
+
+            <!-- Mode: Animation -->
+            <div id="animatePanel" class="panel-section" style="display: none;">
+                <div class="panel-title">Animation Tools</div>
+                <div class="mode-buttons">
+                    <button class="mode-btn" onclick="addKeyframe()">
+                        <span>📸</span> Add Keyframe
+                    </button>
+                    <button class="mode-btn" onclick="playAnimation()">
+                        <span>▶️</span> Play
+                    </button>
+                    <button class="mode-btn" onclick="stopAnimation()">
+                        <span>⏹️</span> Stop
+                    </button>
+                    <button class="mode-btn" onclick="clearAnimation()">
+                        <span>🗑️</span> Clear All
+                    </button>
+                </div>
+
+                <div class="panel-title" style="margin-top: 20px;">Frame Rate</div>
+                <select style="width: 100%; padding: 10px; border-radius: 8px; background: rgba(255,255,255,0.1); color: white; border: none;" onchange="setFPS(this.value)">
+                    <option value="12">12 FPS</option>
+                    <option value="24" selected>24 FPS</option>
+                    <option value="30">30 FPS</option>
+                    <option value="60">60 FPS</option>
+                </select>
+
+                <div class="panel-title" style="margin-top: 20px;">Onion Skin</div>
+                <input type="range" min="0" max="100" value="50" style="width: 100%;" oninput="setOnionSkin(this.value)">
+            </div>
+        </div>
+
+        <!-- Center Canvas -->
+        <div class="canvas-area">
+            <div class="canvas-header">
+                <div class="canvas-title" id="canvasTitle">Drawing Canvas</div>
+                <div class="playback-controls">
+                    <button class="control-btn" onclick="undo()" title="Undo">↩️</button>
+                    <button class="control-btn" onclick="redo()" title="Redo">↪️</button>
+                    <button class="control-btn record" onclick="toggleRecording()" title="Record Video" id="recordBtn">⏺️</button>
+                    <button class="control-btn" onclick="saveProject()" title="Save">💾</button>
+                </div>
+            </div>
+
+            <div class="canvas-wrapper">
+                <canvas id="mainCanvas" width="800" height="600"></canvas>
+                
+                <div class="anim-tools" id="animTools" style="display: none;">
+                    <button class="control-btn" onclick="prevFrame()">⏮️</button>
+                    <button class="control-btn" onclick="togglePlay()" id="playBtn">▶️</button>
+                    <button class="control-btn" onclick="nextFrame()">⏭️</button>
+                </div>
+            </div>
+
+            <div class="timeline" id="timeline" style="display: none;">
+                <span style="font-size: 12px;">Frame: <span id="currentFrame">1</span></span>
+                <div class="timeline-track">
+                    <div class="timeline-progress" id="timelineProgress"></div>
+                    <div class="timeline-frames" id="timelineFrames"></div>
+                </div>
+                <span style="font-size: 12px;" id="totalFrames">/ 1</span>
+            </div>
+        </div>
+
+        <!-- Right Panel -->
+        <div class="right-panel">
+            <!-- Layers -->
+            <div class="panel-section">
+                <div class="panel-title">Layers</div>
+                <div class="layer-list" id="layerList">
+                    <div class="layer-item active">
+                        <div class="layer-icon">🎨</div>
+                        <div class="layer-info">
+                            <div class="layer-name">Background</div>
+                            <div class="layer-type">Canvas</div>
                         </div>
-                        <div class="color-custom-wrapper">
-                            <input type="color" class="color-custom" id="customColor" value="#6366f1">
+                    </div>
+                    <div class="layer-item">
+                        <div class="layer-icon">👤</div>
+                        <div class="layer-info">
+                            <div class="layer-name">Character</div>
+                            <div class="layer-type">Vector</div>
                         </div>
                     </div>
-
-                    <div class="panel-section">
-                        <div class="panel-title">Brush Settings</div>
-                        
-                        <div class="slider-group">
-                            <div class="slider-header">
-                                <span>Size</span>
-                                <span id="sizeValue">5px</span>
-                            </div>
-                            <input type="range" class="slider" id="brushSize" min="1" max="100" value="5">
-                        </div>
-
-                        <div class="slider-group">
-                            <div class="slider-header">
-                                <span>Opacity</span>
-                                <span id="opacityValue">100%</span>
-                            </div>
-                            <input type="range" class="slider" id="opacity" min="1" max="100" value="100">
-                        </div>
-
-                        <div class="preview-box">
-                            <div class="brush-preview" id="brushPreview" style="width: 10px; height: 10px;"></div>
-                        </div>
-                    </div>
-
-                    <div class="panel-section">
-                        <div class="panel-title">Actions</div>
-                        <div class="action-group">
-                            <button class="panel-btn secondary" onclick="undo()">
-                                <span>↩️</span> Undo
-                            </button>
-                            <button class="panel-btn secondary" onclick="redo()">
-                                <span>↪️</span> Redo
-                            </button>
-                            <button class="panel-btn danger" onclick="clearCanvas()">
-                                <span>🗑️</span> Clear Canvas
-                            </button>
+                    <div class="layer-item">
+                        <div class="layer-icon">✨</div>
+                        <div class="layer-info">
+                            <div class="layer-name">Effects</div>
+                            <div class="layer-type">Particles</div>
                         </div>
                     </div>
                 </div>
-
-                <div class="canvas-wrapper">
-                    <canvas id="drawingCanvas" width="1000" height="700"></canvas>
-                    
-                    <div class="floating-actions">
-                        <button class="fab secondary" onclick="undo()">
-                            <span>↩️</span> Undo
-                        </button>
-                        <button class="fab secondary" onclick="clearCanvas()">
-                            <span>🗑️</span> Clear
-                        </button>
-                        <button class="fab primary" onclick="saveImage()">
-                            <span>💾</span> Save Artwork
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Features Section -->
-    <section class="features" id="features">
-        <div class="section-header">
-            <h2>Why Artists Love Us</h2>
-            <p>Professional features designed for creators of all skill levels</p>
-        </div>
-
-        <div class="features-grid">
-            <div class="feature-card">
-                <div class="feature-icon">⚡</div>
-                <h3>Lightning Fast</h3>
-                <p>Zero lag drawing experience powered by HTML5 Canvas. Smooth strokes, instant response, professional performance.</p>
             </div>
 
-            <div class="feature-card">
-                <div class="feature-icon">🎨</div>
-                <h3>Professional Tools</h3>
-                <p>Brushes, shapes, erasers, and precision controls. Everything you need to create stunning digital artwork.</p>
-            </div>
-
-            <div class="feature-card">
-                <div class="feature-icon">💾</div>
-                <h3>Auto-Save</h3>
-                <p>Never lose your work. Automatic local storage saves your progress as you draw. Return anytime to continue.</p>
-            </div>
-
-            <div class="feature-card">
-                <div class="feature-icon">📱</div>
-                <h3>Works Everywhere</h3>
-                <p>Desktop, tablet, or mobile. Touch and stylus support included. Create art on any device, anywhere.</p>
-            </div>
-
-            <div class="feature-card">
-                <div class="feature-icon">🌈</div>
-                <h3>Unlimited Colors</h3>
-                <p>Full spectrum color picker with opacity control. Create the perfect palette for your masterpiece.</p>
-            </div>
-
-            <div class="feature-card">
-                <div class="feature-icon">🔒</div>
-                <h3>100% Private</h3>
-                <p>Your art stays on your device. No account required, no data uploaded. Create with complete privacy.</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- How It Works -->
-    <section class="how-it-works" id="how-it-works">
-        <div class="section-header">
-            <h2>Start Creating in 3 Steps</h2>
-            <p>No downloads, no signup, no hassle</p>
-        </div>
-
-        <div class="steps">
-            <div class="step">
-                <div class="step-number">1</div>
-                <h3>Choose Your Tool</h3>
-                <p>Select from brushes, shapes, and colors in our intuitive toolbar</p>
-            </div>
-            
-            <div class="step">
-                <div class="step-number">2</div>
-                <h3>Create Your Art</h3>
-                <p>Draw, sketch, and design on our professional canvas</p>
-            </div>
-            
-            <div class="step">
-                <div class="step-number">3</div>
-                <h3>Save & Share</h3>
-                <p>Export your masterpiece as PNG and share with the world</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Testimonials -->
-    <section class="testimonials" id="testimonials">
-        <div class="section-header">
-            <h2>Loved by Creators</h2>
-            <p>See what artists are saying about CreatingArtOnline.com</p>
-        </div>
-
-        <div class="testimonials-grid">
-            <div class="testimonial">
-                <p class="testimonial-text">"Finally, a free drawing tool that actually works! The interface is clean, the tools are responsive, and I love that I don't need to download anything."</p>
-                <div class="testimonial-author">
-                    <div class="author-avatar">SM</div>
-                    <div class="author-info">
-                        <h4>Sarah Mitchell</h4>
-                        <p>Digital Artist</p>
-                    </div>
+            <!-- Sound Effects -->
+            <div class="panel-section">
+                <div class="panel-title">Sound Effects</div>
+                <div class="sound-grid">
+                    <button class="sound-btn" onclick="playSound('draw')">✏️</button>
+                    <button class="sound-btn" onclick="playSound('pop')">💥</button>
+                    <button class="sound-btn" onclick="playSound('magic')">✨</button>
+                    <button class="sound-btn" onclick="playSound('splash')">💦</button>
+                    <button class="sound-btn" onclick="playSound('whoosh')">🌪️</button>
+                    <button class="sound-btn" onclick="playSound('ding')">🛎️</button>
                 </div>
             </div>
 
-            <div class="testimonial">
-                <p class="testimonial-text">"I use this for quick sketches and mockups. The auto-save feature has saved me countless times. Highly recommended for any creative!"</p>
-                <div class="testimonial-author">
-                    <div class="author-avatar">JD</div>
-                    <div class="author-info">
-                        <h4>James Davidson</h4>
-                        <p>UI Designer</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="testimonial">
-                <p class="testimonial-text">"Perfect for teaching my students digital art basics. No accounts needed, works on Chromebooks, and exports easily. A game changer!"</p>
-                <div class="testimonial-author">
-                    <div class="author-avatar">ER</div>
-                    <div class="author-info">
-                        <h4>Emma Rodriguez</h4>
-                        <p>Art Teacher</p>
-                    </div>
+            <!-- Export -->
+            <div class="panel-section">
+                <div class="panel-title">Export</div>
+                <div class="export-options">
+                    <button class="export-btn" onclick="exportImage()">
+                        <span>🖼️</span> Save as Image
+                    </button>
+                    <button class="export-btn" onclick="exportVideo()">
+                        <span>🎬</span> Export Video
+                    </button>
+                    <button class="export-btn" onclick="exportGIF()">
+                        <span>🎞️</span> Export GIF
+                    </button>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
 
-    <!-- CTA Section -->
-    <section class="cta-section">
-        <div class="cta-content">
-            <h2>Ready to Create Something Amazing?</h2>
-            <p>Join thousands of artists who trust CreatingArtOnline.com for their digital creativity. Free forever, no strings attached.</p>
-            <a href="#studio" class="btn-primary" style="font-size: 18px; padding: 18px 48px;">
-                <span>🚀</span>
-                Start Drawing Now - It's Free!
-            </a>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer>
-        <div class="footer-content">
-            <div class="footer-brand">
-                <h3>CreatingArtOnline.com</h3>
-                <p>Empowering creativity through accessible digital art tools. Free, private, and powerful online drawing studio for everyone.</p>
-                <div class="social-links">
-                    <a href="#" title="Twitter">𝕏</a>
-                    <a href="#" title="Facebook">f</a>
-                    <a href="#" title="Instagram">📷</a>
-                    <a href="#" title="YouTube">▶</a>
-                </div>
-            </div>
-
-            <div class="footer-links">
-                <h4>Product</h4>
-                <ul>
-                    <li><a href="#studio">Drawing Studio</a></li>
-                    <li><a href="#features">Features</a></li>
-                    <li><a href="#">Updates</a></li>
-                    <li><a href="#">Roadmap</a></li>
-                </ul>
-            </div>
-
-            <div class="footer-links">
-                <h4>Resources</h4>
-                <ul>
-                    <li><a href="#">Help Center</a></li>
-                    <li><a href="#">Tutorials</a></li>
-                    <li><a href="#">Blog</a></li>
-                    <li><a href="#">Community</a></li>
-                </ul>
-            </div>
-
-            <div class="footer-links">
-                <h4>Company</h4>
-                <ul>
-                    <li><a href="#">About Us</a></li>
-                    <li><a href="#">Privacy Policy</a></li>
-                    <li><a href="#">Terms of Service</a></li>
-                    <li><a href="#">Contact</a></li>
-                </ul>
+    <!-- Character Preview Modal -->
+    <div class="modal" id="characterModal">
+        <div class="modal-content">
+            <h2 class="modal-title">Your Character</h2>
+            <div class="character-preview" id="characterPreview">🧒</div>
+            <div style="display: flex; gap: 10px; justify-content: center;">
+                <button class="export-btn" onclick="useCharacter()">Use Character</button>
+                <button class="export-btn" onclick="closeModal()" style="background: rgba(255,255,255,0.2);">Edit More</button>
             </div>
         </div>
-
-        <div class="footer-bottom">
-            <p>&copy; 2024 CreatingArtOnline.com. All rights reserved. Made with ❤️ for artists everywhere.</p>
-        </div>
-    </footer>
-
-    <!-- Toast Notification -->
-    <div class="toast" id="toast">Artwork saved successfully!</div>
+    </div>
 
     <script>
-        // Canvas Setup
-        const canvas = document.getElementById('drawingCanvas');
-        const ctx = canvas.getContext('2d');
-        
-        // Set canvas size based on container
-        function resizeCanvas() {
-            const wrapper = canvas.parentElement;
-            const maxWidth = wrapper.clientWidth - 80;
-            const maxHeight = wrapper.clientHeight - 80;
-            const aspectRatio = 1000 / 700;
-            
-            let width = maxWidth;
-            let height = width / aspectRatio;
-            
-            if (height > maxHeight) {
-                height = maxHeight;
-                width = height * aspectRatio;
-            }
-            
-            canvas.style.width = width + 'px';
-            canvas.style.height = height + 'px';
+        // ==================== AUDIO SYSTEM ====================
+        const AudioContext = window.AudioContext || window.webkitAudioContext;
+        const audioCtx = new AudioContext();
+
+        const sounds = {
+            draw: () => createTone(800, 0.1, 'sine'),
+            pop: () => createTone(400, 0.05, 'square'),
+            magic: () => createTone(1200, 0.3, 'sine'),
+            splash: () => createNoise(0.2),
+            whoosh: () => createSweep(200, 800, 0.3),
+            ding: () => createTone(880, 0.5, 'sine')
+        };
+
+        function createTone(freq, duration, type) {
+            const osc = audioCtx.createOscillator();
+            const gain = audioCtx.createGain();
+            osc.type = type;
+            osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+            gain.gain.setValueAtTime(0.3, audioCtx.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + duration);
+            osc.connect(gain);
+            gain.connect(audioCtx.destination);
+            osc.start();
+            osc.stop(audioCtx.currentTime + duration);
         }
 
-        // Initialize
+        function createNoise(duration) {
+            const bufferSize = audioCtx.sampleRate * duration;
+            const buffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
+            const data = buffer.getChannelData(0);
+            for (let i = 0; i < bufferSize; i++) {
+                data[i] = Math.random() * 2 - 1;
+            }
+            const noise = audioCtx.createBufferSource();
+            noise.buffer = buffer;
+            const gain = audioCtx.createGain();
+            gain.gain.setValueAtTime(0.3, audioCtx.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + duration);
+            noise.connect(gain);
+            gain.connect(audioCtx.destination);
+            noise.start();
+        }
+
+        function createSweep(startFreq, endFreq, duration) {
+            const osc = audioCtx.createOscillator();
+            const gain = audioCtx.createGain();
+            osc.frequency.setValueAtTime(startFreq, audioCtx.currentTime);
+            osc.frequency.linearRampToValueAtTime(endFreq, audioCtx.currentTime + duration);
+            gain.gain.setValueAtTime(0.3, audioCtx.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + duration);
+            osc.connect(gain);
+            gain.connect(audioCtx.destination);
+            osc.start();
+            osc.stop(audioCtx.currentTime + duration);
+        }
+
+        function playSound(name) {
+            if (audioCtx.state === 'suspended') audioCtx.resume();
+            if (sounds[name]) sounds[name]();
+        }
+
+        // ==================== CANVAS SETUP ====================
+        const canvas = document.getElementById('mainCanvas');
+        const ctx = canvas.getContext('2d');
+        
+        // Initialize white background
         ctx.fillStyle = '#ffffff';
         ctx.fillRect(0, 0, canvas.width, canvas.height);
-        resizeCanvas();
-        window.addEventListener('resize', resizeCanvas);
 
-        // State
         let isDrawing = false;
         let currentTool = 'brush';
         let currentColor = '#000000';
         let currentSize = 5;
-        let currentOpacity = 1;
-        let startX, startY;
-        let snapshot;
-        let history = [];
-        let historyStep = -1;
+        let currentMode = 'draw';
 
-        // Save initial state
-        saveState();
-
-        // Tool Selection
-        document.querySelectorAll('.tool-btn').forEach(btn => {
-            btn.addEventListener('click', () => {
-                document.querySelectorAll('.tool-btn').forEach(b => b.classList.remove('active'));
-                btn.classList.add('active');
-                currentTool = btn.dataset.tool;
-            });
-        });
-
-        // Color Selection
-        document.querySelectorAll('.color-btn').forEach(btn => {
-            btn.addEventListener('click', () => {
-                document.querySelectorAll('.color-btn').forEach(b => b.classList.remove('active'));
-                btn.classList.add('active');
-                currentColor = btn.dataset.color;
-                updatePreview();
-            });
-        });
-
-        document.getElementById('customColor').addEventListener('input', (e) => {
-            currentColor = e.target.value;
-            document.querySelectorAll('.color-btn').forEach(b => b.classList.remove('active'));
-            updatePreview();
-        });
-
-        // Brush Size
-        const sizeSlider = document.getElementById('brushSize');
-        const sizeValue = document.getElementById('sizeValue');
-        
-        sizeSlider.addEventListener('input', (e) => {
-            currentSize = parseInt(e.target.value);
-            sizeValue.textContent = currentSize + 'px';
-            updatePreview();
-        });
-
-        // Opacity
-        const opacitySlider = document.getElementById('opacity');
-        const opacityValue = document.getElementById('opacityValue');
-        
-        opacitySlider.addEventListener('input', (e) => {
-            currentOpacity = parseInt(e.target.value) / 100;
-            opacityValue.textContent = Math.round(currentOpacity * 100) + '%';
-        });
-
-        function updatePreview() {
-            const preview = document.getElementById('brushPreview');
-            preview.style.width = currentSize + 'px';
-            preview.style.height = currentSize + 'px';
-            preview.style.background = currentColor;
-            preview.style.opacity = currentOpacity;
-        }
-
-        // Drawing Functions
+        // ==================== DRAWING SYSTEM ====================
         function getPos(e) {
             const rect = canvas.getBoundingClientRect();
             const scaleX = canvas.width / rect.width;
@@ -1523,55 +849,28 @@
         function startDrawing(e) {
             isDrawing = true;
             const pos = getPos(e);
-            startX = pos.x;
-            startY = pos.y;
-            
             ctx.beginPath();
-            ctx.lineCap = 'round';
-            ctx.lineJoin = 'round';
-            ctx.lineWidth = currentSize;
-            
-            const r = parseInt(currentColor.slice(1, 3), 16);
-            const g = parseInt(currentColor.slice(3, 5), 16);
-            const b = parseInt(currentColor.slice(5, 7), 16);
-            ctx.strokeStyle = `rgba(${r}, ${g}, ${b}, ${currentOpacity})`;
-            ctx.fillStyle = `rgba(${r}, ${g}, ${b}, ${currentOpacity})`;
-
-            if (currentTool === 'brush') {
-                ctx.globalCompositeOperation = 'source-over';
-                ctx.moveTo(startX, startY);
-            } else if (currentTool === 'eraser') {
-                ctx.globalCompositeOperation = 'destination-out';
-                ctx.moveTo(startX, startY);
-            } else {
-                snapshot = ctx.getImageData(0, 0, canvas.width, canvas.height);
-            }
+            ctx.moveTo(pos.x, pos.y);
+            playSound('draw');
         }
 
         function draw(e) {
             if (!isDrawing) return;
             const pos = getPos(e);
-
-            if (currentTool === 'brush' || currentTool === 'eraser') {
-                ctx.lineTo(pos.x, pos.y);
-                ctx.stroke();
-            } else if (currentTool === 'line') {
-                ctx.putImageData(snapshot, 0, 0);
-                ctx.beginPath();
-                ctx.moveTo(startX, startY);
-                ctx.lineTo(pos.x, pos.y);
-                ctx.stroke();
-            } else if (currentTool === 'rect') {
-                ctx.putImageData(snapshot, 0, 0);
-                ctx.beginPath();
-                ctx.strokeRect(startX, startY, pos.x - startX, pos.y - startY);
-            } else if (currentTool === 'circle') {
-                ctx.putImageData(snapshot, 0, 0);
-                ctx.beginPath();
-                const radius = Math.sqrt(Math.pow(pos.x - startX, 2) + Math.pow(pos.y - startY, 2));
-                ctx.arc(startX, startY, radius, 0, 2 * Math.PI);
-                ctx.stroke();
+            
+            ctx.lineWidth = currentSize;
+            ctx.lineCap = 'round';
+            ctx.lineJoin = 'round';
+            ctx.strokeStyle = currentColor;
+            
+            if (currentTool === 'eraser') {
+                ctx.globalCompositeOperation = 'destination-out';
+            } else {
+                ctx.globalCompositeOperation = 'source-over';
             }
+            
+            ctx.lineTo(pos.x, pos.y);
+            ctx.stroke();
         }
 
         function stopDrawing() {
@@ -1582,13 +881,12 @@
             }
         }
 
-        // Event Listeners
         canvas.addEventListener('mousedown', startDrawing);
         canvas.addEventListener('mousemove', draw);
         canvas.addEventListener('mouseup', stopDrawing);
         canvas.addEventListener('mouseout', stopDrawing);
 
-        // Touch Support
+        // Touch support
         canvas.addEventListener('touchstart', (e) => {
             e.preventDefault();
             const touch = e.touches[0];
@@ -1611,22 +909,288 @@
             canvas.dispatchEvent(new MouseEvent('mouseup', {}));
         });
 
-        // History Management
+        // ==================== TOOL FUNCTIONS ====================
+        function setTool(tool) {
+            currentTool = tool;
+            document.querySelectorAll('.mode-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.closest('.mode-btn').classList.add('active');
+        }
+
+        function setColor(color) {
+            currentColor = color;
+            document.querySelectorAll('.color-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+        }
+
+        function setBrushSize(size) {
+            currentSize = parseInt(size);
+        }
+
+        // ==================== CHARACTER SYSTEM ====================
+        const characters = {
+            chibi: { emoji: '🧒', name: 'Chibi' },
+            anime: { emoji: '👧', name: 'Anime Girl' },
+            boy: { emoji: '👦', name: 'Boy' },
+            girl: { emoji: '👩', name: 'Girl' },
+            cat: { emoji: '🐱', name: 'Cat' },
+            dog: { emoji: '🐶', name: 'Dog' }
+        };
+
+        let currentCharacter = 'chibi';
+        let characterAccessories = {};
+
+        function selectCharacter(char) {
+            currentCharacter = char;
+            document.querySelectorAll('.character-thumb').forEach(thumb => thumb.classList.remove('active'));
+            event.target.classList.add('active');
+            drawCharacter();
+        }
+
+        function setAccessory(type, style) {
+            characterAccessories[type] = style;
+            document.querySelectorAll('.item-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            drawCharacter();
+            playSound('pop');
+        }
+
+        function setSkinColor(color) {
+            // Apply skin color logic
+            drawCharacter();
+        }
+
+        function setHairColor(color) {
+            // Apply hair color logic
+            drawCharacter();
+        }
+
+        function drawCharacter() {
+            ctx.fillStyle = '#ffffff';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            const centerX = canvas.width / 2;
+            const centerY = canvas.height / 2;
+            
+            // Draw character emoji large
+            ctx.font = '200px Arial';
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.fillText(characters[currentCharacter].emoji, centerX, centerY);
+            
+            // Draw accessories
+            if (characterAccessories.acc) {
+                ctx.font = '80px Arial';
+                ctx.fillText(getAccessoryEmoji(characterAccessories.acc), centerX + 80, centerY - 80);
+            }
+        }
+
+        function getAccessoryEmoji(acc) {
+            const emojis = {
+                glasses: '👓', hat: '🎩', bow: '🎀', crown: '👑'
+            };
+            return emojis[acc] || '';
+        }
+
+        // ==================== ANIMATION SYSTEM ====================
+        let keyframes = [];
+        let currentFrame = 0;
+        let isPlaying = false;
+        let fps = 24;
+        let mediaRecorder = null;
+        let recordedChunks = [];
+
+        function addKeyframe() {
+            keyframes.push(canvas.toDataURL());
+            updateTimeline();
+            playSound('ding');
+        }
+
+        function updateTimeline() {
+            const framesContainer = document.getElementById('timelineFrames');
+            framesContainer.innerHTML = '';
+            keyframes.forEach((_, i) => {
+                const marker = document.createElement('div');
+                marker.className = 'frame-marker' + (i === currentFrame ? ' active' : '');
+                framesContainer.appendChild(marker);
+            });
+            document.getElementById('totalFrames').textContent = '/ ' + keyframes.length;
+        }
+
+        function playAnimation() {
+            if (keyframes.length < 2) return;
+            isPlaying = true;
+            let frame = 0;
+            const interval = setInterval(() => {
+                if (!isPlaying || frame >= keyframes.length) {
+                    clearInterval(interval);
+                    isPlaying = false;
+                    return;
+                }
+                loadKeyframe(frame);
+                frame++;
+            }, 1000 / fps);
+        }
+
+        function stopAnimation() {
+            isPlaying = false;
+        }
+
+        function loadKeyframe(index) {
+            if (index < 0 || index >= keyframes.length) return;
+            const img = new Image();
+            img.onload = () => {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                ctx.drawImage(img, 0, 0);
+            };
+            img.src = keyframes[index];
+            currentFrame = index;
+            document.getElementById('currentFrame').textContent = index + 1;
+            updateTimeline();
+        }
+
+        function prevFrame() {
+            if (currentFrame > 0) loadKeyframe(currentFrame - 1);
+        }
+
+        function nextFrame() {
+            if (currentFrame < keyframes.length - 1) loadKeyframe(currentFrame + 1);
+        }
+
+        function togglePlay() {
+            if (isPlaying) stopAnimation();
+            else playAnimation();
+        }
+
+        function clearAnimation() {
+            keyframes = [];
+            currentFrame = 0;
+            updateTimeline();
+        }
+
+        function setFPS(value) {
+            fps = parseInt(value);
+        }
+
+        function setOnionSkin(value) {
+            // Onion skin opacity logic
+        }
+
+        // ==================== VIDEO RECORDING ====================
+        function toggleRecording() {
+            const btn = document.getElementById('recordBtn');
+            if (mediaRecorder && mediaRecorder.state === 'recording') {
+                stopRecording();
+                btn.classList.remove('record');
+                btn.textContent = '⏺️';
+            } else {
+                startRecording();
+                btn.classList.add('record');
+                btn.textContent = '⏹️';
+            }
+        }
+
+        function startRecording() {
+            const stream = canvas.captureStream(fps);
+            mediaRecorder = new MediaRecorder(stream, {
+                mimeType: 'video/webm;codecs=vp9'
+            });
+            
+            recordedChunks = [];
+            mediaRecorder.ondataavailable = (e) => {
+                if (e.data.size > 0) recordedChunks.push(e.data);
+            };
+            
+            mediaRecorder.onstop = () => {
+                const blob = new Blob(recordedChunks, { type: 'video/webm' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'animation.webm';
+                a.click();
+                URL.revokeObjectURL(url);
+            };
+            
+            mediaRecorder.start();
+            playSound('magic');
+        }
+
+        function stopRecording() {
+            if (mediaRecorder) mediaRecorder.stop();
+        }
+
+        // ==================== EXPORT FUNCTIONS ====================
+        function exportImage() {
+            const link = document.createElement('a');
+            link.download = 'artwork.png';
+            link.href = canvas.toDataURL();
+            link.click();
+            playSound('ding');
+        }
+
+        function exportVideo() {
+            if (keyframes.length < 2) {
+                alert('Add at least 2 keyframes first!');
+                return;
+            }
+            // Compile keyframes into video
+            playAnimation();
+            setTimeout(() => {
+                startRecording();
+                setTimeout(stopRecording, (keyframes.length / fps) * 1000);
+            }, 100);
+        }
+
+        function exportGIF() {
+            alert('GIF export coming soon! Use video export for now.');
+        }
+
+        // ==================== MODE SWITCHING ====================
+        function setMode(mode) {
+            currentMode = mode;
+            
+            // Update tabs
+            document.querySelectorAll('.nav-tab').forEach(tab => tab.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            // Show/hide panels
+            document.getElementById('drawPanel').style.display = mode === 'draw' ? 'block' : 'none';
+            document.getElementById('characterPanel').style.display = mode === 'character' ? 'block' : 'none';
+            document.getElementById('animatePanel').style.display = mode === 'animate' ? 'block' : 'none';
+            
+            // Show/hide animation tools
+            document.getElementById('animTools').style.display = mode === 'animate' ? 'flex' : 'none';
+            document.getElementById('timeline').style.display = mode === 'animate' ? 'flex' : 'none';
+            
+            // Update title
+            const titles = {
+                draw: 'Drawing Canvas',
+                character: 'Character Creator',
+                animate: 'Animation Timeline'
+            };
+            document.getElementById('canvasTitle').textContent = titles[mode];
+            
+            playSound('whoosh');
+        }
+
+        // ==================== UNDO/REDO ====================
+        let history = [];
+        let historyStep = -1;
+
         function saveState() {
             historyStep++;
             if (historyStep < history.length) history.length = historyStep;
             history.push(canvas.toDataURL());
-            if (history.length > 30) {
+            if (history.length > 20) {
                 history.shift();
                 historyStep--;
             }
-            localStorage.setItem('creatingartonline-drawing', history[historyStep]);
         }
 
         function undo() {
             if (historyStep > 0) {
                 historyStep--;
                 restoreState();
+                playSound('pop');
             }
         }
 
@@ -1634,109 +1198,42 @@
             if (historyStep < history.length - 1) {
                 historyStep++;
                 restoreState();
+                playSound('pop');
             }
         }
 
         function restoreState() {
             const img = new Image();
-            img.src = history[historyStep];
             img.onload = () => {
                 ctx.clearRect(0, 0, canvas.width, canvas.height);
                 ctx.drawImage(img, 0, 0);
             };
+            img.src = history[historyStep];
         }
 
-        function clearCanvas() {
-            if (confirm('Clear your canvas? This cannot be undone.')) {
-                ctx.fillStyle = '#ffffff';
-                ctx.fillRect(0, 0, canvas.width, canvas.height);
-                saveState();
-            }
+        function saveProject() {
+            localStorage.setItem('creatingartonline-project', JSON.stringify({
+                history: history,
+                keyframes: keyframes,
+                character: currentCharacter,
+                accessories: characterAccessories
+            }));
+            playSound('ding');
+            alert('Project saved!');
         }
 
-        function saveImage() {
-            const link = document.createElement('a');
-            link.download = 'creatingartonline-masterpiece-' + Date.now() + '.png';
-            link.href = canvas.toDataURL();
-            link.click();
-            
-            showToast('Artwork saved successfully! 🎨');
+        // ==================== MODAL ====================
+        function useCharacter() {
+            closeModal();
+            setMode('animate');
         }
 
-        function showToast(message) {
-            const toast = document.getElementById('toast');
-            toast.textContent = message;
-            toast.classList.add('show');
-            setTimeout(() => toast.classList.remove('show'), 3000);
+        function closeModal() {
+            document.getElementById('characterModal').classList.remove('active');
         }
 
-        // Load saved drawing
-        window.addEventListener('load', () => {
-            const saved = localStorage.getItem('creatingartonline-drawing');
-            if (saved) {
-                const img = new Image();
-                img.src = saved;
-                img.onload = () => {
-                    ctx.drawImage(img, 0, 0);
-                    saveState();
-                };
-            }
-        });
-
-        // Keyboard Shortcuts
-        document.addEventListener('keydown', (e) => {
-            if ((e.ctrlKey || e.metaKey) && e.key === 'z') {
-                e.preventDefault();
-                undo();
-            }
-            if ((e.ctrlKey || e.metaKey) && e.key === 'y') {
-                e.preventDefault();
-                redo();
-            }
-            if ((e.ctrlKey || e.metaKey) && e.key === 's') {
-                e.preventDefault();
-                saveImage();
-            }
-        });
-
-        // Navigation scroll effect
-        window.addEventListener('scroll', () => {
-            const nav = document.getElementById('navbar');
-            if (window.scrollY > 50) {
-                nav.classList.add('scrolled');
-            } else {
-                nav.classList.remove('scrolled');
-            }
-        });
-
-        // Smooth scroll
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }
-            });
-        });
-
-        // Intersection Observer for animations
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('animate-in');
-                }
-            });
-        }, { threshold: 0.1 });
-
-        document.querySelectorAll('.feature-card, .testimonial, .step').forEach(el => {
-            observer.observe(el);
-        });
-
-        // Mobile menu toggle
-        function toggleMobileMenu() {
-            alert('Mobile menu - implement as needed');
-        }
+        // Initialize
+        saveState();
     </script>
 </body>
 </html>
